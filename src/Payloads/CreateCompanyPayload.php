@@ -5,23 +5,23 @@ namespace Shellrent\VeeamVspcApiClient\Payloads;
 class CreateCompanyPayload implements Payload {
 	private string $Name;
 	
-	private ?string $Alias;
+	private ?string $Alias = null;
 	
-	private string $TaxId;
+	private ?string $TaxId = null;
 	
-	private string $Email;
+	private ?string $Email = null;
 	
-	private string $Phone;
+	private ?string $Phone = null;
 	
-	private int $Country;
+	private ?int $Country = null;
 	
-	private string $City;
+	private ?string $City = null;
 	
-	private string $Street;
+	private ?string $Street = null;
 	
-	private int $ZipCode;
+	private ?int $ZipCode = null;
 	
-	private int $CompanyId;
+	private ?int $CompanyId = null;
 	
 	private ?string $ResellerUid = null;
 	
@@ -192,15 +192,15 @@ class CreateCompanyPayload implements Payload {
 			'resellerUid' => $this->ResellerUid,
 			'organizationInput' => [
 				'name' => $this->Name,
-				'alias' => $this->Alias,
-				'taxId' => $this->TaxId,
-				'email' => $this->Email,
-				'phone' => $this->Phone,
-				'country' => $this->Country,
-				'city' => $this->City,
-				'street' => $this->Street,
-				'zipCode' => $this->ZipCode,
-				'companyId' => $this->CompanyId,
+				'alias' => $this->Alias ?? null,
+				'taxId' => $this->TaxId ?? null,
+				'email' => $this->Email ?? null,
+				'phone' => $this->Phone ?? null,
+				'country' => $this->Country ?? null,
+				'city' => $this->City ?? null,
+				'street' => $this->Street ?? null,
+				'zipCode' => $this->ZipCode ?? null,
+				'companyId' => $this->CompanyId ?? null,
 			],
 			'subscriptionPlanUid' => $this->SubscriptionPlanUid,
 			'permissions' => $this->Permissions,
