@@ -15,4 +15,8 @@ class Microsoft365ServerRepository implements Repository {
 	public function getAll(): RequestBuilder {
 		return $this->createGetRequest( '' );
 	}
+	
+	public function getAllProxiesForServer( string $vb365ServerUid ): RequestBuilder {
+		return $this->createGetRequest( sprintf( '%s/backupProxies', $vb365ServerUid ) );
+	}
 }
