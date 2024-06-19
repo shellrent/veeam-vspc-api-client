@@ -2,7 +2,7 @@
 
 namespace Shellrent\VeeamVspcApiClient\Payloads;
 
-class CreateCompanyMicrosoft365BackupResource implements Payload {
+class CreateCompanyMicrosoft365BackupResourcePayload implements Payload {
 	private $RepositoryUid;
 	
 	private $ProxyUid;

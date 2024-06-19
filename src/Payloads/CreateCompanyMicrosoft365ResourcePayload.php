@@ -2,7 +2,7 @@
 
 namespace Shellrent\VeeamVspcApiClient\Payloads;
 
-class CreateCompanyMicrosoft365Resource implements Payload {
+class CreateCompanyMicrosoft365ResourcePayload implements Payload {
 	private $Vb365ServerUid;
 	
 	private $FriendlyName;
