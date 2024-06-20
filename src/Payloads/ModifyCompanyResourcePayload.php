@@ -3,21 +3,42 @@
 namespace Shellrent\VeeamVspcApiClient\Payloads;
 
 class ModifyCompanyResourcePayload implements Payload {
-	private array $Modifiers = [];
+	private ?int $UsersQuota = null;
 	
-	public function addModifier( $value, string $path, string $operation, string $from = null ) {
-		$this->Modifiers[] = [
-			'value' => $value,
-			'path' => $path,
-			'op' => $operation,
-			'from' => $from
-		];
+	private ?int $UsersQuotaUnlimited = null;
+	
+	public function setUsersQuota( ?int $UsersQuota ) {
+		$this->UsersQuota = $UsersQuota;
+		
+		return $this;
+	}
+	
+	public function setUsersQuotaUnlimited( ?int $UsersQuotaUnlimited ) {
+		$this->UsersQuotaUnlimited = $UsersQuotaUnlimited;
 		
 		return $this;
 	}
 	
 	public function getBody() {
-		return json_encode( $this->Modifiers );
+		$body = [];
+		
+		if ( !is_null( $this->UsersQuota ) ) {
+			$body[] = [
+				'value' => $this->UsersQuota,
+				'path' => '/usersQuota',
+				'op' => 'replace',
+			];
+		}
+		
+		if ( !is_null( $this->UsersQuotaUnlimited ) ) {
+			$body[] = [
+				'value' => $this->UsersQuotaUnlimited,
+				'path' => '/isUsersQuotaUnlimited',
+				'op' => 'replace',
+			];
+		}
+		
+		return json_encode( $body );
 	}
 	
 	public function getContentType(): string {

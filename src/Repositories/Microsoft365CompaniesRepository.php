@@ -25,7 +25,11 @@ class Microsoft365CompaniesRepository implements Repository {
 		return $this->createGetRequest( sprintf( '/%s/vb365Resources', $companyId ) );
 	}
 
-	public function getCompanyForResource( string $companyId, string $vb365ResourceUid, string $vb365BackupResourceUid ): RequestBuilder {
+	public function getAllBackupResourcesForCompany( string $companyId, string $vb365ResourceUid ): RequestBuilder {
+		return $this->createGetRequest( sprintf( '/%s/vb365Resources/%s/backupResources', $companyId, $vb365ResourceUid ) );
+	}
+	
+	public function getBackupResourceForCompany( string $companyId, string $vb365ResourceUid, string $vb365BackupResourceUid ): RequestBuilder {
 		return $this->createGetRequest( sprintf( '/%s/vb365Resources/%s/backupResources/%s', $companyId, $vb365ResourceUid, $vb365BackupResourceUid ) );
 	}
 	
