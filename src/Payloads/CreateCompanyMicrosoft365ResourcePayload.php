@@ -42,7 +42,7 @@ class CreateCompanyMicrosoft365ResourcePayload implements Payload {
 		$body = [
 			"vb365ServerUid" => $this->Vb365ServerUid,
 			"friendlyName" => $this->FriendlyName,
-			"isJobSchedulingEnabled" => $this->IsJobSchedulingEnabled ?? null,
+			"isJobSchedulingEnabled" => $this->IsJobSchedulingEnabled ?? false,
 		];
 		
 		return json_encode( $body );
