@@ -92,19 +92,19 @@ class CompanyRepository implements Repository {
 		);
 	}
 	
-	public function deleteCompanyForResource( string $companyId, string $vb365ResourceUid ): RequestBuilder {
+	public function deleteCompanyVb365Resource( string $companyId, string $vb365ResourceUid ): RequestBuilder {
 		return $this->createDeleteRequest( sprintf( '/%s/vb365Resources/%s', $companyId, $vb365ResourceUid ) );
 	}
 	
-	public function deleteCompanyForBackupResource( string $companyId, string $vb365ResourceUid, string $vb365BackupResourceUid ): RequestBuilder {
+	public function deleteCompanyVb365BackupResources( string $companyId, string $vb365ResourceUid, string $vb365BackupResourceUid ): RequestBuilder {
 		return $this->createDeleteRequest( sprintf( '/%s/vb365Resources/%s/backupResources/%s', $companyId, $vb365ResourceUid, $vb365BackupResourceUid ) );
 	}
 	
-	public function createCompanyForResource( string $companyId, CreateCompanyMicrosoft365ResourcePayload $request ): RequestBuilder {
+	public function createCompanyVb365Resource( string $companyId, CreateCompanyMicrosoft365ResourcePayload $request ): RequestBuilder {
 		return $this->createPostRequest( sprintf( '/%s/vb365Resources', $companyId ), $request );
 	}
 	
-	public function createCompanyForBackupResource( string $companyId, string $vb365ResourceUid, CreateCompanyMicrosoft365BackupResourcePayload $request ): RequestBuilder {
+	public function createCompanyVb365BackupResource( string $companyId, string $vb365ResourceUid, CreateCompanyMicrosoft365BackupResourcePayload $request ): RequestBuilder {
 		return $this->createPostRequest( sprintf( '/%s/vb365Resources/%s/backupResources', $companyId, $vb365ResourceUid ), $request );
 	}
 }
