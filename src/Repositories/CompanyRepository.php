@@ -73,19 +73,19 @@ class CompanyRepository implements Repository {
 		return $this->createDeleteRequest( sprintf( '/%s/sites/%s/backupResources/%s', $companyUid, $siteUid, $resourceUid ) );
 	}
 	
-	public function getAllResoucesForCompany( string $companyId ): RequestBuilder {
+	public function getAllCompanyVb365Resources( string $companyId ): RequestBuilder {
 		return $this->createGetRequest( sprintf( '/%s/vb365Resources', $companyId ) );
 	}
 	
-	public function getAllBackupResourcesForCompany( string $companyId, string $vb365ResourceUid ): RequestBuilder {
+	public function getAllCompanyVb365BackupResources( string $companyId, string $vb365ResourceUid ): RequestBuilder {
 		return $this->createGetRequest( sprintf( '/%s/vb365Resources/%s/backupResources', $companyId, $vb365ResourceUid ) );
 	}
 	
-	public function getBackupResourceForCompany( string $companyId, string $vb365ResourceUid, string $vb365BackupResourceUid ): RequestBuilder {
+	public function getCompanyVb365BackupResource( string $companyId, string $vb365ResourceUid, string $vb365BackupResourceUid ): RequestBuilder {
 		return $this->createGetRequest( sprintf( '/%s/vb365Resources/%s/backupResources/%s', $companyId, $vb365ResourceUid, $vb365BackupResourceUid ) );
 	}
 	
-	public function patchModifyCompanyResource( string $companyId, string $vb365ResourceUid, string $vb365BackupResourceUid, ModifyCompanyResourcePayload $request ): RequestBuilder {
+	public function patchModifyCompanyVb365Resource( string $companyId, string $vb365ResourceUid, string $vb365BackupResourceUid, ModifyCompanyResourcePayload $request ): RequestBuilder {
 		return $this->createPatchRequest(
 			sprintf( '/%s/vb365Resources/%s/backupResources/%s', $companyId, $vb365ResourceUid, $vb365BackupResourceUid ),
 			$request
