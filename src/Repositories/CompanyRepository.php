@@ -69,4 +69,10 @@ class CompanyRepository implements Repository {
 	public function deleteCompanyBackupResource( string $companyUid, string $siteUid, string $resourceUid ): RequestBuilder {
 		return $this->createDeleteRequest( sprintf( '/%s/sites/%s/backupResources/%s', $companyUid, $siteUid, $resourceUid ) );
 	}
+	
+	
+	public function getAllSites( string $companyUid ) {
+		return $this->createGetRequest( sprintf( '/%s/sites', $companyUid ) );
+		
+	}
 }
