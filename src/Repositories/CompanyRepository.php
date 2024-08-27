@@ -33,6 +33,10 @@ class CompanyRepository implements Repository {
 		return $this->createGetRequest( '/' );
 	}
 	
+	public function getAllSites( string $companyUid ): RequestBuilder {
+		return $this->createGetRequest( sprintf( '/%s/sites', $companyUid ) );
+	}
+	
 	public function getAllCompanyBackupResources( string $companyUid, string $siteUid ): RequestBuilder {
 		return $this->createGetRequest( sprintf( '/%s/sites/%s/backupResources', $companyUid, $siteUid ) );
 	}
