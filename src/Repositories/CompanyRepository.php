@@ -29,8 +29,16 @@ class CompanyRepository implements Repository {
 		return 'organizations/companies';
 	}
 	
-	public function getAll(): RequestBuilder {
-		return $this->createGetRequest( '/' );
+	public function getAll(bool $expand = true): RequestBuilder {
+		$request = $this->createGetRequest( '/' );
+
+        if ($expand) {
+            $request->query([
+                'expand' => 'Organization'
+            ]);
+        }
+
+        return $request;
 	}
 	
 	public function getAllSites( string $companyUid ): RequestBuilder {
