@@ -16,12 +16,28 @@ class BackupServerRepository implements Repository {
 		return $this->createGetRequest( '' );
 	}
 	
-	public function getAllBackupRepositories(): RequestBuilder {
-		return $this->createGetRequest( '/repositories' );
+	public function getAllBackupRepositories(bool $expand = true): RequestBuilder {
+		$request = $this->createGetRequest( '/repositories' );
+
+        if ($expand) {
+            $request->query([
+                'expand' => 'BackupRepositoryInfo'
+            ]);
+        }
+
+        return $request;
 	}
-	
-	public function getBackupRepository( string $backupServerUid, string $repositoryUid ): RequestBuilder {
-		return $this->createGetRequest( sprintf( '/%s/repositories/%s', $backupServerUid, $repositoryUid ) );
+
+	public function getBackupRepository( string $backupServerUid, string $repositoryUid, bool $expand = true ): RequestBuilder {
+		$request = $this->createGetRequest( sprintf( '/%s/repositories/%s', $backupServerUid, $repositoryUid ) );
+
+        if ($expand) {
+            $request->query([
+                'expand' => 'BackupRepositoryInfo'
+            ]);
+        }
+
+        return $request;
 	}
 	
 	public function getAllJobs(): RequestBuilder {
