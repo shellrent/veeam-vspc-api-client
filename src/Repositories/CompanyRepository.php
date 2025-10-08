@@ -86,7 +86,7 @@ class CompanyRepository implements Repository {
 	}
 	
 	public function getAllCompanyVb365Resources( string $companyId ): RequestBuilder {
-		return $this->createGetRequest( sprintf( '/%s/vb365Resources', $companyId ) );
+		return $this->createGetRequest( sprintf( '/%s/hostedResources/vb365', $companyId ) );
 	}
 	
 	public function getAllCompanyVb365BackupResources( string $companyId, string $vb365ResourceUid ): RequestBuilder {
