@@ -4,14 +4,14 @@ namespace Shellrent\VeeamVspcApiClient\Support;
 
 use Shellrent\VeeamVspcApiClient\Payloads\Payload;
 
-trait CreatePatchRequest {
-        protected function createPatchRequest( string $url, ?Payload $payload = null, array $options = [] ): RequestBuilder {
+trait CreatePutRequest {
+        protected function createPutRequest( string $url, ?Payload $payload = null, array $options = [] ): RequestBuilder {
                 $uri = $this->getBaseRoute() . $url;
 
                 if ( $payload && $payload->getContentType() ) {
                         $options['Content-Type'] = $payload->getContentType();
                 }
 
-                return new RequestBuilder( 'PATCH', $uri, $options, $payload ? $payload->getBody() : null );
+                return new RequestBuilder( 'PUT', $uri, $options, $payload ? $payload->getBody() : null );
         }
 }
