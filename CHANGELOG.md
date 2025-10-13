@@ -9,6 +9,7 @@
 - `CreateAuthenticationAsymmetricAlgorithmChallengePayload`, `EditAuthenticationAsymmetricAlgorithmChallengePayload`, `CreateAuthenticationPkcs12DecryptionPayload`, `CreateAuthenticationRefreshTokenPayload`, `CreateAuthenticationUsernamePasswordPayload`, and `CreateAuthenticationOAuthTokenPayload` for the authentication endpoints.
 - `EditBackupAgentPayload`, `EditWindowsBackupAgentSettingsPayload`, and `ReplaceWindowsBackupAgentSettingsPayload` for backup agent PATCH and PUT request bodies.
 - `CreateLinuxBackupPolicyPayload`, `CreateWindowsBackupPolicyPayload`, `EditBackupPolicyPayload`, `EditLinuxBackupPolicyPayload`, and `EditWindowsBackupPolicyPayload` to cover backup policy request bodies.
+- `EditBackupServerJobPayload` to build JSON Patch bodies for backup server job updates.
 
 ### Changed
 - Refined the `Payload` contract (typed bodies) and reworked `GenericPayload` into an abstract base with static factory helpers for ad-hoc payloads.
@@ -17,6 +18,7 @@
 - Updated `BackupAgentRepository` methods to require the dedicated backup agent payload builders for settings and agent PATCH operations.
 - Updated `BackupPolicyRepository` methods to require the dedicated backup policy payload builders for create and patch operations.
 - Renamed `OAuthPayload` → `CreateAuthenticationOAuthTokenPayload` and updated the README authentication example accordingly.
+- Updated `BackupServerJobRepository::patchBackupServerJob` to accept `EditBackupServerJobPayload` instead of the generic `Payload` contract.
 
 ## v2.0 - 2025-10-13
 ### Added

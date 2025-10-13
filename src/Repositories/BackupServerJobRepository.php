@@ -2,7 +2,7 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditBackupServerJobPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -695,7 +695,7 @@ class BackupServerJobRepository implements Repository {
 	 * Modify Job Modifies a job with the specified UID. Returns a positive response when the task is added to the internal queue and not when the task is executed.
 	 * Path: /infrastructure/backupServers/jobs/{jobUid}
 	 */
-	public function patchBackupServerJob(string $jobUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+	public function patchBackupServerJob(string $jobUid, ?EditBackupServerJobPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/jobs/%s', $jobUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
