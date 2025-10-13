@@ -7,7 +7,7 @@
         "Veeam",
         "VSPC",
         "Api Client",
-        "PHP Api client"
+        "PHP Veeam"
     ],
     "autoload": {
         "psr-4": {
@@ -16,8 +16,8 @@
     },
     "authors": [
         {
-            "name": "Matteo Miotello",
-            "email": "matteo.miotello@shellrent.com"
+            "name": "Shellrent",
+            "email": "sviluppo@shellrent.com"
         }
     ],
     "require": {
