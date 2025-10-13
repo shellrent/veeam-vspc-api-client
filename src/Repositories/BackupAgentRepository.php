@@ -2,7 +2,9 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditBackupAgentPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditWindowsBackupAgentSettingsPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\ReplaceWindowsBackupAgentSettingsPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -249,25 +251,25 @@ class BackupAgentRepository implements Repository {
 	 * Modify Veeam Agent for Microsoft Windows Settings Modifies settings configured for Veeam Agent for Microsoft Windows with the specified UID.
 	 * Path: /infrastructure/backupAgents/windows/{backupAgentUid}/settings
 	 */
-	public function patchBackupAgentSettings(string $backupAgentUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPatchRequest(sprintf( '/windows/%s/settings', $backupAgentUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
-	}
+        public function patchBackupAgentSettings(string $backupAgentUid, EditWindowsBackupAgentSettingsPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPatchRequest(sprintf( '/windows/%s/settings', $backupAgentUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
+        }
 
 	/**
 	 * Replace Veeam Agent for Microsoft Windows Settings Replaces settings configured for Veeam Agent for Microsoft Windows with the specified UID.
 	 * Path: /infrastructure/backupAgents/windows/{backupAgentUid}/settings
 	 */
-	public function setBackupAgentSettings(string $backupAgentUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPutRequest(sprintf( '/windows/%s/settings', $backupAgentUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
-	}
+        public function setBackupAgentSettings(string $backupAgentUid, ReplaceWindowsBackupAgentSettingsPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPutRequest(sprintf( '/windows/%s/settings', $backupAgentUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
+        }
 
 	/**
 	 * Uninstall CBT Driver Uninstalls the Veeam CBT driver from a Windows computer that runs Veeam Agent with the specified UID.
@@ -301,12 +303,12 @@ class BackupAgentRepository implements Repository {
 	 * Modify Backup Agent Modifies Veeam backup agent with the specified UID.
 	 * Path: /infrastructure/backupAgents/{backupAgentUid}
 	 */
-	public function patchBackupAgent(string $backupAgentUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPatchRequest(sprintf( '/%s', $backupAgentUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
+        public function patchBackupAgent(string $backupAgentUid, EditBackupAgentPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPatchRequest(sprintf( '/%s', $backupAgentUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
 	}
 
 	/**
