@@ -8,12 +8,14 @@
 - `AbstractFormUrlEncodedPayload` and `AbstractMultipartFormDataPayload` helpers to cover URL-encoded and multipart form submissions.
 - `CreateAuthenticationAsymmetricAlgorithmChallengePayload`, `EditAuthenticationAsymmetricAlgorithmChallengePayload`, `CreateAuthenticationPkcs12DecryptionPayload`, `CreateAuthenticationRefreshTokenPayload`, `CreateAuthenticationUsernamePasswordPayload`, and `CreateAuthenticationOAuthTokenPayload` for the authentication endpoints.
 - `EditBackupAgentPayload`, `EditWindowsBackupAgentSettingsPayload`, and `ReplaceWindowsBackupAgentSettingsPayload` for backup agent PATCH and PUT request bodies.
+- `CreateLinuxBackupPolicyPayload`, `CreateWindowsBackupPolicyPayload`, `EditBackupPolicyPayload`, `EditLinuxBackupPolicyPayload`, and `EditWindowsBackupPolicyPayload` to cover backup policy request bodies.
 
 ### Changed
 - Refined the `Payload` contract (typed bodies) and reworked `GenericPayload` into an abstract base with static factory helpers for ad-hoc payloads.
 - Updated `BackupAgentJobRepository` to type-hint the new payload builders for Windows and Linux job operations.
 - Updated `AuthenticationRepository` methods to require the new authentication payload builders instead of the generic interface.
 - Updated `BackupAgentRepository` methods to require the dedicated backup agent payload builders for settings and agent PATCH operations.
+- Updated `BackupPolicyRepository` methods to require the dedicated backup policy payload builders for create and patch operations.
 - Renamed `OAuthPayload` → `CreateAuthenticationOAuthTokenPayload` and updated the README authentication example accordingly.
 
 ## v2.0 - 2025-10-13
