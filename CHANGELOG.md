@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased] - 2025-10-13
+## v2.0 - 2025-10-13
 ### Added
-- Published the official VSPC 3.5.1 OpenAPI specification (`openapi/3.5.1/vspc-api.json`) and added contributor guidance files to align generators and code style.
+- Published the official VSPC 3.5.1 OpenAPI specification (`openapi/vspc-api.json`) and added contributor guidance files to align generators and code style.
 - Expanded documentation with a richer README and renamed the license to `LICENSE.md` for consistency.
 - Introduced `GenericPayload`, the `CreatePutRequest` helper trait, and comprehensive repository coverage including new `BackupPolicyRepository`, `BackupServerJobRepository`, `LocationRepository`, and `ProviderRepository` classes alongside major extensions to company, cloud connect, backup server, licensing, organization, Microsoft 365, management agent, and alarm repositories.
 - Implemented full sets of backup agent job endpoints across Windows, Linux, and macOS in `BackupAgentJobRepository`.

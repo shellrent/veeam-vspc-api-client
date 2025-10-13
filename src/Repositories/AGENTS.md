@@ -14,4 +14,4 @@ Ogni classe in questa cartella rappresenta il client per una categoria di endpoi
 ## Note pratiche
 - Se l'endpoint permette filtri o paginazione, documenta l'uso nelle docblock del metodo e, quando necessario, valorizza parametri default coerenti con l'API.
 - In caso di breaking change tra versioni dell'API, valuta se introdurre un nuovo metodo lasciando il precedente deprecato per retrocompatibilità.
-- Ricontrolla sempre `openapi/3.5.1/vspc-api.json` per confermare request body, required fields e possibili valori enumerati.
+- Ricontrolla sempre `openapi/vspc-api.json` per confermare request body, required fields e possibili valori enumerati.
