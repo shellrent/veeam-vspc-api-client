@@ -12,7 +12,7 @@ class ModifyLicenseManagedInVCSPPulsePayload implements Payload {
 	 */
 	protected array $Workloads = [];
 	
-	public function getBody() {
+	public function getBody(): string {
 		$body = $this->Modifiers;
 		
 		foreach ( $this->Workloads as $workload ) {

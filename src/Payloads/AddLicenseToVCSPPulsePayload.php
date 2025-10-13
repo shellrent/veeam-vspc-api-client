@@ -19,7 +19,7 @@ class AddLicenseToVCSPPulsePayload implements Payload {
 
 	protected array $Workloads = [];
 	
-	public function getBody() {
+	public function getBody(): string {
 		$body = [
 			'productId' => $this->ProductId,
 			'contractId' => $this->ContractId,

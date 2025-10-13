@@ -55,7 +55,7 @@ class EditCompanyBackupResourcePayload implements Payload {
 		return $this;
 	}
 	
-	public function getBody() {
+	public function getBody(): string {
 		$body = [];
 		
 		if ( !is_null( $this->ServerQuota ) ) {

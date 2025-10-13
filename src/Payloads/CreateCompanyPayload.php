@@ -187,7 +187,7 @@ class CreateCompanyPayload implements Payload {
 		return $this;
 	}
 	
-	public function getBody() {
+	public function getBody(): string {
 		$array = [
 			'resellerUid' => $this->ResellerUid,
 			'organizationInput' => [

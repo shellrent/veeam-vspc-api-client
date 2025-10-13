@@ -17,7 +17,7 @@ class ModifyCompanyPayload implements Payload {
 		return $this;
 	}
 	
-	public function getBody() {
+	public function getBody(): string {
 		return json_encode( $this->Modifiers );
 	}
 	

@@ -38,7 +38,7 @@ class CreateCompanyMicrosoft365ResourcePayload implements Payload {
 		return $this;
 	}
 	
-	public function getBody() {
+	public function getBody(): string {
 		$body = [
 			"vb365ServerUid" => $this->Vb365ServerUid,
 			"friendlyName" => $this->FriendlyName,

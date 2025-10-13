@@ -68,7 +68,7 @@ class CreateCompanySiteResourcePayload implements Payload {
 		return $this;
 	}
 	
-	public function getBody() {
+	public function getBody(): string {
 		$body = [
 			'siteUid' => $this->SiteUid,
 			'cloudTenantType' => 'General',

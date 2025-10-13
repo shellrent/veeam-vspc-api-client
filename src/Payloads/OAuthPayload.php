@@ -40,7 +40,7 @@ class OAuthPayload implements Payload {
 		return $this;
 	}
 	
-	public function getBody() {
+	public function getBody(): string {
 		return
 			http_build_query( [
 				'grant_type' => 'password',

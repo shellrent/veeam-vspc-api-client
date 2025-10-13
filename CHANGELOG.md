@@ -1,5 +1,15 @@
 # Changelog
 
+## 2025-10-13 - _current_
+### Added
+- `CreateWindowsBackupAgentJobConfigurationPayload`, `EditWindowsBackupAgentJobConfigurationPayload`, and `EditWindowsBackupAgentJobPayload` to manage Windows backup agent job bodies consistently.
+- `CreateLinuxBackupAgentJobConfigurationPayload` and `EditLinuxBackupAgentJobConfigurationPayload` for Linux job configuration requests.
+- `AbstractJsonPayload` and `JsonPatchPayload` helpers to simplify JSON payload authoring.
+
+### Changed
+- Refined the `Payload` contract (typed bodies) and reworked `GenericPayload` into an abstract base with static factory helpers for ad-hoc payloads.
+- Updated `BackupAgentJobRepository` to type-hint the new payload builders for Windows and Linux job operations.
+
 ## v2.0 - 2025-10-13
 ### Added
 - Published the official VSPC 3.5.1 OpenAPI specification (`openapi/vspc-api.json`) and added contributor guidance files to align generators and code style.

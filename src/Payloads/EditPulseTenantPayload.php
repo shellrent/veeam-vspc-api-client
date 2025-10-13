@@ -5,7 +5,7 @@ namespace Shellrent\VeeamVspcApiClient\Payloads;
 class EditPulseTenantPayload implements Payload {
 	private string $MappedMasterOrganizationUid;
 	
-	public function getBody() {
+	public function getBody(): string {
 		$body = [
 			[
 				'value' => $this->MappedMasterOrganizationUid,

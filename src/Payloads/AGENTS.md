@@ -12,3 +12,4 @@ Le classi in questa directory rappresentano i corpi delle richieste (`POST`, `PA
 ## Serializzazione
 - Se crei nuovi payload assicurati che implementino `jsonSerialize()` oppure un metodo equivalente previsto dall'interfaccia.
 - Quando un campo richiede una struttura annidata, usa array PHP standard rispettando esattamente la struttura definita nello swagger.
+- Per payload JSON riutilizzabili preferisci estendere `AbstractJsonPayload` o `JsonPatchPayload`; sfrutta i factory method di `GenericPayload` solo per casi estremamente puntuali.

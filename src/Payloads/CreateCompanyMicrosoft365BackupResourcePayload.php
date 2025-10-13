@@ -51,7 +51,7 @@ class CreateCompanyMicrosoft365BackupResourcePayload implements Payload {
 		return $this;
 	}
 	
-	public function getBody() {
+	public function getBody(): string {
 		$body = [
 			"repositoryUid" => $this->RepositoryUid,
 			"proxyUid" => $this->ProxyUid,
