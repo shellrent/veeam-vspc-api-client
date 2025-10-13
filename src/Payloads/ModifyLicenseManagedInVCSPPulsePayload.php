@@ -5,10 +5,23 @@ namespace Shellrent\VeeamVspcApiClient\Payloads;
 class ModifyLicenseManagedInVCSPPulsePayload implements Payload {
 	protected string $AssignedCompanyUid;
 	
-	protected array $Modifiers;
+	protected array $Modifiers = [];
+	
+	/**
+	 * @var array<int, array<string, mixed>>
+	 */
+	protected array $Workloads = [];
 	
 	public function getBody() {
 		$body = $this->Modifiers;
+		
+		foreach ( $this->Workloads as $workload ) {
+			$body[] = [
+			        'value' => $workload['count'],
+			        'path' => '/workloads/' . $workload['index'] . '/count',
+			        'op' => 'replace'
+			];
+		}
 		
 		return json_encode( $body );
 	}
@@ -18,6 +31,15 @@ class ModifyLicenseManagedInVCSPPulsePayload implements Payload {
 			'value' => $companyUid,
 			'path' => '/assignedCompanyUid',
 			'op' => 'replace'
+		];
+		
+		return $this;
+	}
+	
+	public function addWorkloadCount( $workloadIndex, $count ) {
+		$this->Workloads[] = [
+			'index' => $workloadIndex,
+			'count' => $count,
 		];
 		
 		return $this;
