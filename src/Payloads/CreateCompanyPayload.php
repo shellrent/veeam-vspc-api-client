@@ -2,215 +2,99 @@
 
 namespace Shellrent\VeeamVspcApiClient\Payloads;
 
-class CreateCompanyPayload implements Payload {
-	private string $Name;
-	
-	private ?string $Alias = null;
-	
-	private ?string $TaxId = null;
-	
-	private ?string $Email = null;
-	
-	private ?string $Phone = null;
-	
-	private ?int $Country = null;
-	
-	private ?string $City = null;
-	
-	private ?string $Street = null;
-	
-	private ?int $ZipCode = null;
-	
-	private ?int $CompanyId = null;
-	
-	private ?string $ResellerUid = null;
-	
-	private ?string $SubscriptionPlanUid = null;
-	
-	private array $Permissions = [
-		'REST',
-	];
+class CreateCompanyPayload extends AbstractJsonPayload {
+        private ?string $resellerUid = null;
 
-	private bool $IsAlarmDetectEnabled = true;
-	
-	/**
-	 * @param mixed $Name
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setName( $Name ) {
-		$this->Name = $Name;
+        /**
+         * @var array<string, mixed>|null
+         */
+        private ?array $organizationInput = null;
 
-		return $this;
-	}
-	
-	/**
-	 * @param mixed $Alias
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setAlias( $Alias ) {
-		$this->Alias = $Alias;
+        private ?string $subscriptionPlanUid = null;
 
-		return $this;
-	}
-	
-	/**
-	 * @param mixed $TaxId
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setTaxId( $TaxId ) {
-		$this->TaxId = $TaxId;
+        /**
+         * @var string[]|null
+         */
+        private ?array $permissions = null;
 
-		return $this;
-	}
-	
-	/**
-	 * @param mixed $Email
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setEmail( $Email ) {
-		$this->Email = $Email;
+        private ?bool $isAlarmDetectEnabled = null;
 
-		return $this;
-	}
-	
-	/**
-	 * @param mixed $Phone
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setPhone( $Phone ) {
-		$this->Phone = $Phone;
+        /**
+         * @var array<string, mixed>|null
+         */
+        private ?array $companyServices = null;
 
-		return $this;
-	}
-	
-	/**
-	 * @param mixed $Country
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setCountry( $Country ) {
-		$this->Country = $Country;
+        public function __construct(
+                ?array $organizationInput = null,
+                ?string $resellerUid = null,
+                ?string $subscriptionPlanUid = null,
+                ?array $permissions = null,
+                ?bool $isAlarmDetectEnabled = null,
+                ?array $companyServices = null
+        ) {
+                parent::__construct();
 
-		return $this;
-	}
-	
-	/**
-	 * @param mixed $City
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setCity( $City ) {
-		$this->City = $City;
+                $this->organizationInput = $organizationInput;
+                $this->resellerUid = $resellerUid;
+                $this->subscriptionPlanUid = $subscriptionPlanUid;
+                $this->permissions = $permissions;
+                $this->isAlarmDetectEnabled = $isAlarmDetectEnabled;
+                $this->companyServices = $companyServices;
+        }
 
-		return $this;
-	}
-	
-	/**
-	 * @param mixed $Street
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setStreet( $Street ) {
-		$this->Street = $Street;
+        public function setResellerUid(?string $resellerUid): self {
+                $this->resellerUid = $resellerUid;
 
-		return $this;
-	}
-	
-	/**
-	 * @param mixed $ZipCode
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setZipCode( $ZipCode ) {
-		$this->ZipCode = $ZipCode;
+                return $this;
+        }
 
-		return $this;
-	}
-	
-	/**
-	 * @param mixed $CompanyId
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setCompanyId( $CompanyId ) {
-		$this->CompanyId = $CompanyId;
+        /**
+         * @param array<string, mixed> $organizationInput
+         */
+        public function setOrganizationInput(array $organizationInput): self {
+                $this->organizationInput = $organizationInput;
 
-		return $this;
-	}
-	
-	/**
-	 * @param string|null $ResellerUid
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setResellerUid( ?string $ResellerUid ): CreateCompanyPayload {
-		$this->ResellerUid = $ResellerUid;
+                return $this;
+        }
 
-		return $this;
-	}
-	
-	/**
-	 * @param string|null $SubscriptionPlanUid
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setSubscriptionPlanUid( ?string $SubscriptionPlanUid ): CreateCompanyPayload {
-		$this->SubscriptionPlanUid = $SubscriptionPlanUid;
+        public function setSubscriptionPlanUid(?string $subscriptionPlanUid): self {
+                $this->subscriptionPlanUid = $subscriptionPlanUid;
 
-		return $this;
-	}
-	
-	/**
-	 * @param array|string[] $Permissions
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setPermissions( $Permissions ) {
-		$this->Permissions = $Permissions;
+                return $this;
+        }
 
-		return $this;
-	}
-	
-	/**
-	 * @param bool $IsAlarmDetectEnabled
-	 *
-	 * @return CreateCompanyPayload
-	 */
-	public function setIsAlarmDetectEnabled( bool $IsAlarmDetectEnabled ): CreateCompanyPayload {
-		$this->IsAlarmDetectEnabled = $IsAlarmDetectEnabled;
+        /**
+         * @param string[]|null $permissions
+         */
+        public function setPermissions(?array $permissions): self {
+                $this->permissions = $permissions;
 
-		return $this;
-	}
-	
-	public function getBody(): string {
-		$array = [
-			'resellerUid' => $this->ResellerUid,
-			'organizationInput' => [
-				'name' => $this->Name,
-				'alias' => $this->Alias ?? null,
-				'taxId' => $this->TaxId ?? null,
-				'email' => $this->Email ?? null,
-				'phone' => $this->Phone ?? null,
-				'country' => $this->Country ?? null,
-				'city' => $this->City ?? null,
-				'street' => $this->Street ?? null,
-				'zipCode' => $this->ZipCode ?? null,
-				'companyId' => $this->CompanyId ?? null,
-			],
-			'subscriptionPlanUid' => $this->SubscriptionPlanUid,
-			'permissions' => $this->Permissions,
-			'IsAlarmDetectEnabled' => $this->IsAlarmDetectEnabled,
-		];
-		
-		return json_encode( $array );
-	}
-	
-	public function getContentType(): string {
-		return 'application/json';
-	}
+                return $this;
+        }
+
+        public function setIsAlarmDetectEnabled(?bool $isAlarmDetectEnabled): self {
+                $this->isAlarmDetectEnabled = $isAlarmDetectEnabled;
+
+                return $this;
+        }
+
+        /**
+         * @param array<string, mixed>|null $companyServices
+         */
+        public function setCompanyServices(?array $companyServices): self {
+                $this->companyServices = $companyServices;
+
+                return $this;
+        }
+
+        public function jsonSerialize(): array {
+                return array_filter([
+                        'resellerUid' => $this->resellerUid,
+                        'organizationInput' => $this->organizationInput,
+                        'subscriptionPlanUid' => $this->subscriptionPlanUid,
+                        'permissions' => $this->permissions,
+                        'isAlarmDetectEnabled' => $this->isAlarmDetectEnabled,
+                        'companyServices' => $this->companyServices,
+                ], static fn ($value) => $value !== null);
+        }
 }
