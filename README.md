@@ -38,14 +38,19 @@ $client = new VeeamSPCClient(
 ```
 
 ### Authenticate and Fetch a Token
-Use the `AuthenticationRepository` with the `OAuthPayload` helper to request an access token.
+Use the `AuthenticationRepository` with the `CreateAuthenticationOAuthTokenPayload` helper to request an access token.
 
 ```php
-use Shellrent\VeeamVspcApiClient\Payloads\OAuthPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateAuthenticationOAuthTokenPayload;
 use Shellrent\VeeamVspcApiClient\Repositories\AuthenticationRepository;
 
 $authRepository = new AuthenticationRepository();
-$request = $authRepository->postOAuthAuthentication(new OAuthPayload('username', 'password'));
+$request = $authRepository->oAuth2IssueToken(
+    new CreateAuthenticationOAuthTokenPayload(
+        username: 'username',
+        password: 'password'
+    )
+);
 
 $tokenResponse = $client->jsonResponse($request);
 $token = $tokenResponse->access_token ?? null;
