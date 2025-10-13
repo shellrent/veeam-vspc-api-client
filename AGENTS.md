@@ -1,6 +1,6 @@
 # Linee guida generali per gli agenti
 
-Questa libreria PHP fornisce un SDK per le API della Veeam Service Provider Console (VSPC) versione 8.1. Il file OpenAPI ufficiale è disponibile in `openapi/3.5.1/vspc-api.json` ed è la fonte di verità per rotta, parametri e modelli di payload.
+Questa libreria PHP fornisce un SDK per le API della Veeam Service Provider Console (VSPC) versione 8.1. Il file OpenAPI ufficiale è disponibile in `openapi/vspc-api.json` ed è la fonte di verità per rotta, parametri e modelli di payload.
 
 ## Come pianificare una modifica
 - Leggi sempre lo swagger prima di implementare nuovi metodi o payload: ogni classe del namespace `Repositories` mappa una "categoria" (tag) del file OpenAPI.

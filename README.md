@@ -85,7 +85,7 @@ $response = $client->jsonResponse($request);
 ```
 
 ## OpenAPI Specification
-The official VSPC OpenAPI definition used to generate the SDK is stored in [`openapi/3.5.1/vspc-api.json`](openapi/3.5.1/vspc-api.json). Refer to it for a complete list of available operations, parameters, and payload schemas.
+The official VSPC OpenAPI definition used to generate the SDK is stored in [`openapi/vspc-api.json`](openapi/3.5.1/vspc-api.json). Refer to it for a complete list of available operations, parameters, and payload schemas.
 
 ## Contributing
 Contributions are welcome! If you plan to submit a pull request:
