@@ -6,9 +6,16 @@
     "keywords": [
         "Veeam",
         "VSPC",
-        "Api Client",
+        "API Client",
         "PHP Veeam"
     ],
+    "require": {
+        "php": "^8.1",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.5",
+        "nesbot/carbon": "^2.72",
+        "psr/http-message": "^1.1"
+    },
     "autoload": {
         "psr-4": {
             "Shellrent\\VeeamVspcApiClient\\": "src/"
@@ -20,9 +27,8 @@
             "email": "sviluppo@shellrent.com"
         }
     ],
-    "require": {
-        "guzzlehttp/guzzle": "^7.5",
-        "php": "^8.1",
-	    "ext-json": "*"
+    "support": {
+        "issues": "https://github.com/shellrent/veeam-vspc-api-client/issues",
+        "source": "https://github.com/shellrent/veeam-vspc-api-client"
     }
 }
