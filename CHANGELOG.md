@@ -11,6 +11,7 @@
 - `CreateLinuxBackupPolicyPayload`, `CreateWindowsBackupPolicyPayload`, `EditBackupPolicyPayload`, `EditLinuxBackupPolicyPayload`, and `EditWindowsBackupPolicyPayload` to cover backup policy request bodies.
 - `EditBackupServerJobPayload` to build JSON Patch bodies for backup server job updates.
 - `CreateBackupServerIsoPredownloadPayload`, `CreateBackupServerUpgradePayload`, `CreateBackupServerPatchPayload`, `CreateBackupServerMultipartPatchPayload`, `CreateBackupServerScheduledUpgradePayload`, `CreateBackupServerScheduledPatchPayload`, `CreateBackupServerVirtualCenterObjectsExpansionPayload`, `CreateBackupServerVcdObjectsExpansionPayload`, `CreateBackupServerStandardCredentialsPayload`, `CreateBackupServerLinuxCredentialsPayload`, and `CreateBackupServerEncryptionPasswordPayload` for backup server upgrade, patch, credential, encryption, and inventory expansion requests.
+- `EditCloudConnectSitePayload`, `ModifyCloudConnectSiteMaintenanceModePayload`, and `ModifyCloudConnectSiteTenantManagementModePayload` for Cloud Connect site updates and mode toggles.
 
 ### Changed
 - Refined the `Payload` contract (typed bodies) and reworked `GenericPayload` into an abstract base with static factory helpers for ad-hoc payloads.
@@ -21,6 +22,7 @@
 - Renamed `OAuthPayload` → `CreateAuthenticationOAuthTokenPayload` and updated the README authentication example accordingly.
 - Updated `BackupServerJobRepository::patchBackupServerJob` to accept `EditBackupServerJobPayload` instead of the generic `Payload` contract.
 - Updated `BackupServerRepository` to accept typed payload builders for upgrade, patch, credential, encryption password, and inventory expansion operations.
+- Updated `CloudConnectRepository` to require the dedicated Cloud Connect payload builders for site modifications and maintenance or tenant management toggles.
 
 ## v2.0 - 2025-10-13
 ### Added

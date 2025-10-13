@@ -2,7 +2,9 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCloudConnectSitePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\ModifyCloudConnectSiteMaintenanceModePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\ModifyCloudConnectSiteTenantManagementModePayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePutRequest;
@@ -333,7 +335,7 @@ class CloudConnectRepository implements Repository {
 	 * Modify Site Modifies a cloud agent installed on a Veeam Cloud Connect site with the specified UID.
 	 * Path: /infrastructure/sites/{siteUid}
 	 */
-	public function patchSite(string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchSite(string $siteUid, EditCloudConnectSitePayload $payload, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s', $siteUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -393,7 +395,7 @@ class CloudConnectRepository implements Repository {
 	 * Set Site Maintenance Mode Enables or disables the maintenance mode for a site with the specified UID.
 	 * Path: /infrastructure/sites/{siteUid}/maintenanceModeIsEnabled
 	 */
-	public function setSiteMaintenanceMode(string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function setSiteMaintenanceMode(string $siteUid, ModifyCloudConnectSiteMaintenanceModePayload $payload, array $query = []): RequestBuilder {
 		$request = $this->createPutRequest(sprintf( '/%s/maintenanceModeIsEnabled', $siteUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -405,7 +407,7 @@ class CloudConnectRepository implements Repository {
 	 * Set Tenant Management on Site Enables or disables tenant management on a Veeam Cloud Connect site with the specified UID.
 	 * Path: /infrastructure/sites/{siteUid}/tenantManagementInCloudConnectIsEnabled
 	 */
-	public function setSiteTenantManagementMode(string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function setSiteTenantManagementMode(string $siteUid, ModifyCloudConnectSiteTenantManagementModePayload $payload, array $query = []): RequestBuilder {
 		$request = $this->createPutRequest(sprintf( '/%s/tenantManagementInCloudConnectIsEnabled', $siteUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
