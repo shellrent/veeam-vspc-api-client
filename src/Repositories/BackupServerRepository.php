@@ -2,6 +2,17 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerEncryptionPasswordPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerIsoPredownloadPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerLinuxCredentialsPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerMultipartPatchPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerPatchPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerScheduledPatchPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerScheduledUpgradePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerStandardCredentialsPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerUpgradePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerVcdObjectsExpansionPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateBackupServerVirtualCenterObjectsExpansionPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePostRequest;
 use Shellrent\VeeamVspcApiClient\Support\RequestBuilder;
@@ -188,6 +199,149 @@ class BackupServerRepository implements Repository {
 	 */
 	public function forceCollectBackupServer(string $backupServerUid): RequestBuilder {
 		return $this->createPostRequest(sprintf( '/%s/collect', $backupServerUid ));
+	}
+
+	/**
+	 * Download Veeam Backup & Replication Upgrade Setup File Downloads the Veeam Backup & Replication upgrade setup file for further installation on a Veeam Backup & Replication server with the specified UID.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/upgrade/iso/predownload
+	 */
+	public function createBackupServerIsoPredownload(string $backupServerUid, ?CreateBackupServerIsoPredownloadPayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/upgrade/iso/predownload', $backupServerUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Install Veeam Backup & Replication Update Installs the latest Veeam Backup & Replication update on a server with the specified UID.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/upgrade
+	 */
+	public function createBackupServerUpgrade(string $backupServerUid, ?CreateBackupServerUpgradePayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/upgrade', $backupServerUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Install Veeam Backup & Replication Patch Installs a Veeam Backup & Replication patch on a server with the specified UID.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/patch
+	 */
+	public function createBackupServerPatch(string $backupServerUid, ?CreateBackupServerPatchPayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/patch', $backupServerUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Create Veeam Backup & Replication Patch Upload Creates a multipart upload session for a Veeam Backup & Replication patch on a server with the specified UID.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/patch/upload/multipart/create
+	 */
+	public function createBackupServerMultipartPatch(string $backupServerUid, ?CreateBackupServerMultipartPatchPayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/patch/upload/multipart/create', $backupServerUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Schedule Veeam Backup & Replication Update Creates a scheduled task that installs the latest Veeam Backup & Replication update on a server with the specified UID.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/scheduledTasks/upgrade
+	 */
+	public function scheduleBackupServerUpgrade(string $backupServerUid, ?CreateBackupServerScheduledUpgradePayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/scheduledTasks/upgrade', $backupServerUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Schedule Veeam Backup & Replication Patch Creates a scheduled task that installs a Veeam Backup & Replication patch on a server with the specified UID.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/scheduledTasks/patch
+	 */
+	public function scheduleBackupServerPatch(string $backupServerUid, ?CreateBackupServerScheduledPatchPayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/scheduledTasks/patch', $backupServerUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Expand VMware vSphere Object Containers Retrieves nested inventory items for the specified VMware vSphere object.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/servers/virtualCenter/{virtualCenterUid}/objects/expand
+	 */
+	public function expandBackupServerVirtualCenterObjects(string $backupServerUid, string $virtualCenterUid, ?CreateBackupServerVirtualCenterObjectsExpansionPayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/servers/virtualCenter/%s/objects/expand', $backupServerUid, $virtualCenterUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Expand VMware Cloud Director Object Containers Retrieves nested inventory items for the specified VMware Cloud Director object.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/vcdServers/{vcdServerUid}/objects/expand
+	 */
+	public function expandBackupServerVcdObjects(string $backupServerUid, string $vcdServerUid, ?CreateBackupServerVcdObjectsExpansionPayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/vcdServers/%s/objects/expand', $backupServerUid, $vcdServerUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Create Standard Credentials Creates Windows or general-purpose credentials on a Veeam Backup & Replication server with the specified UID.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/credentials/standard
+	 */
+	public function createBackupServerStandardCredentials(string $backupServerUid, ?CreateBackupServerStandardCredentialsPayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/credentials/standard', $backupServerUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Create Linux Credentials Creates Linux credentials on a Veeam Backup & Replication server with the specified UID.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/credentials/linux
+	 */
+	public function createBackupServerLinuxCredentials(string $backupServerUid, ?CreateBackupServerLinuxCredentialsPayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/credentials/linux', $backupServerUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
+	}
+
+	/**
+	 * Create Encryption Password Registers an encryption password for a Veeam Backup & Replication server with the specified UID.
+	 * Path: /infrastructure/backupServers/{backupServerUid}/encryptionPasswords
+	 */
+	public function createBackupServerEncryptionPassword(string $backupServerUid, ?CreateBackupServerEncryptionPasswordPayload $payload = null, array $query = []): RequestBuilder {
+		$request = $this->createPostRequest(sprintf( '/%s/encryptionPasswords', $backupServerUid ), $payload);
+		if ($query !== []) {
+			$request->query($query);
+		}
+
+		return $request;
 	}
 
 	/**
