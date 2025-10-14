@@ -2,7 +2,13 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateVb365BackupJobPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateVb365CopyJobPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateVb365Microsoft365OrganizationPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateVb365OrganizationCompanyMappingPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditVb365BackupJobPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditVb365CopyJobPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditVb365Microsoft365OrganizationPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -91,8 +97,8 @@ class Microsoft365ServerRepository implements Repository {
 	 * Map Microsoft Organization to Company Maps a Microsoft organization to a company.
 	 * Path: /infrastructure/vb365Servers/organizations/companyMappings
 	 */
-	public function createVb365OrganizationToCompanyMapping(?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPostRequest('/vb365Servers/organizations/companyMappings', $payload);
+        public function createVb365OrganizationToCompanyMapping(CreateVb365OrganizationCompanyMappingPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPostRequest('/vb365Servers/organizations/companyMappings', $payload);
 		if ($query !== []) {
 			$request->query($query);
 		}
@@ -247,8 +253,8 @@ class Microsoft365ServerRepository implements Repository {
 	 * Create Microsoft 365 Organization Creates a new Microsoft 365 organization on a Veeam Backup for Microsoft 365 server with the specified UID.
 	 * Path: /infrastructure/vb365Servers/{vb365ServerUid}/organizations/Microsoft365
 	 */
-	public function createVb365Microsoft365Organization(string $vb365ServerUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPostRequest(sprintf( '/vb365Servers/%s/organizations/Microsoft365', $vb365ServerUid ), $payload);
+        public function createVb365Microsoft365Organization(string $vb365ServerUid, CreateVb365Microsoft365OrganizationPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPostRequest(sprintf( '/vb365Servers/%s/organizations/Microsoft365', $vb365ServerUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
 		}
@@ -271,8 +277,8 @@ class Microsoft365ServerRepository implements Repository {
 	 * Modify Microsoft 365 Organization Modifies a Microsoft 365 organization with the specified UID.
 	 * Path: /infrastructure/vb365Servers/{vb365ServerUid}/organizations/Microsoft365/{vb365OrganizationUid}
 	 */
-	public function patchVb365Microsoft365Organization(string $vb365ServerUid, string $vb365OrganizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPatchRequest(sprintf( '/vb365Servers/%s/organizations/Microsoft365/%s', $vb365ServerUid, $vb365OrganizationUid ), $payload);
+        public function patchVb365Microsoft365Organization(string $vb365ServerUid, string $vb365OrganizationUid, EditVb365Microsoft365OrganizationPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPatchRequest(sprintf( '/vb365Servers/%s/organizations/Microsoft365/%s', $vb365ServerUid, $vb365OrganizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
 		}
@@ -331,8 +337,8 @@ class Microsoft365ServerRepository implements Repository {
 	 * Modify Veeam Backup for Microsoft 365 Backup Job Modifies a Veeam Backup for Microsoft 365 backup job with the specified UID. > [For Veeam Backup for Microsoft 365 servers hosted by Veeam Service Provider Console] Company users must not modify the `schedulePolicy` property. Otherwise the operation will result in error.
 	 * Path: /infrastructure/vb365Servers/{vb365ServerUid}/organizations/jobs/backup/{vb365BackupJobUid}
 	 */
-	public function patchVb365BackupJob(string $vb365ServerUid, string $vb365BackupJobUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPatchRequest(sprintf( '/vb365Servers/%s/organizations/jobs/backup/%s', $vb365ServerUid, $vb365BackupJobUid ), $payload);
+        public function patchVb365BackupJob(string $vb365ServerUid, string $vb365BackupJobUid, EditVb365BackupJobPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPatchRequest(sprintf( '/vb365Servers/%s/organizations/jobs/backup/%s', $vb365ServerUid, $vb365BackupJobUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
 		}
@@ -355,8 +361,8 @@ class Microsoft365ServerRepository implements Repository {
 	 * Create Veeam Backup for Microsoft 365 Backup Copy Job Creates a new Veeam Backup for Microsoft 365 backup copy job. > You can save the job schedule only if that functionality is enabled for you in the Veeam Backup for Microsoft 365 resource configuration. Otherwise the operation will result in error.
 	 * Path: /infrastructure/vb365Servers/{vb365ServerUid}/organizations/jobs/copy
 	 */
-	public function createVb365CopyJob(string $vb365ServerUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPostRequest(sprintf( '/vb365Servers/%s/organizations/jobs/copy', $vb365ServerUid ), $payload);
+        public function createVb365CopyJob(string $vb365ServerUid, CreateVb365CopyJobPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPostRequest(sprintf( '/vb365Servers/%s/organizations/jobs/copy', $vb365ServerUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
 		}
@@ -379,8 +385,8 @@ class Microsoft365ServerRepository implements Repository {
 	 * Modify Veeam Backup for Microsoft 365 Backup Copy Job Modifies a Veeam Backup for Microsoft 365 backup copy job with the specified UID. > You can save the job schedule only if that functionality is enabled for you in the Veeam Backup for Microsoft 365 resource configuration. Otherwise the operation will result in error.
 	 * Path: /infrastructure/vb365Servers/{vb365ServerUid}/organizations/jobs/copy/{vb365CopyJobUid}
 	 */
-	public function patchVb365CopyJob(string $vb365ServerUid, string $vb365CopyJobUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPatchRequest(sprintf( '/vb365Servers/%s/organizations/jobs/copy/%s', $vb365ServerUid, $vb365CopyJobUid ), $payload);
+        public function patchVb365CopyJob(string $vb365ServerUid, string $vb365CopyJobUid, EditVb365CopyJobPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPatchRequest(sprintf( '/vb365Servers/%s/organizations/jobs/copy/%s', $vb365ServerUid, $vb365CopyJobUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
 		}
@@ -463,8 +469,8 @@ class Microsoft365ServerRepository implements Repository {
 	 * Create Veeam Backup for Microsoft 365 Backup Job Creates a new Veeam Backup for Microsoft 365 backup job. > [For Veeam Backup for Microsoft 365 servers hosted by Veeam Service Provider Console] Company users must pass the `null` value for the `schedulePolicy` property. Otherwise the operation will result in error.
 	 * Path: /infrastructure/vb365Servers/{vb365ServerUid}/organizations/{vb365OrganizationUid}/jobs/backup
 	 */
-	public function createVb365BackupJob(string $vb365ServerUid, string $vb365OrganizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPostRequest(sprintf( '/vb365Servers/%s/organizations/%s/jobs/backup', $vb365ServerUid, $vb365OrganizationUid ), $payload);
+        public function createVb365BackupJob(string $vb365ServerUid, string $vb365OrganizationUid, CreateVb365BackupJobPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPostRequest(sprintf( '/vb365Servers/%s/organizations/%s/jobs/backup', $vb365ServerUid, $vb365OrganizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
 		}
