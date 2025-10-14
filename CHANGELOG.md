@@ -17,6 +17,7 @@
 - `CreateLocationPayload` and `EditLocationPayload` to provide typed request bodies for Location endpoints.
 - `EditManagementAgentPayload` to supply a JSON Patch helper for management agent updates.
 - Added organization payload builders (`EditOrganizationPayload`, `EditOrganizationAutoDeploymentSettingsPayload`, `EditOrganizationBrandingSettingsPayload`, `EditOrganizationNotificationSettingsPayload`, `EditOrganizationCustomWelcomeEmailTemplatePayload`, `EditOrganizationPolicySettingsPayload`, `CreateOrganizationNotificationOAuth2SignInPayload`, `CreateOrganizationNotificationSmtpTestPayload`, `CreateOrganizationNotificationTestEmailPayload`, `CreateOrganizationCustomWelcomeEmailTemplatePayload`) for the Organization repository endpoints.
+- `EditPulseConfigurationPayload`, `CreatePulseLicensePayload`, and `EditPulseLicensePayload` to provide typed request bodies for VCSP Pulse configuration and license operations.
 - Added company payload builders (`CreateCompanyPayload`, `EditCompanyPayload`, `CreateCompanyVb365ResourcePayload`, `EditCompanyVb365ResourcePayload`, `CreateCompanyVb365BackupResourcePayload`, `EditCompanyVb365BackupResourcePayload`, `CreateCompanyHostedVbrResourcePayload`, `EditCompanyHostedVbrResourcePayload`, `CreateCompanyHostedVbrBackupResourcePayload`, `EditCompanyHostedVbrBackupResourcePayload`, `CreateCompanyHostedVbrTagResourcePayload`, `EditCompanyPermissionsPayload`, `CreateCompanySiteResourcePayload`, `EditCompanySiteResourcePayload`, `CreateCompanySiteBackupResourcePayload`, `EditCompanySiteBackupResourcePayload`, `CreateCompanySiteReplicationResourcePayload`, `EditCompanySiteReplicationResourcePayload`, `EditCompanySiteReplicationResourceNetworkAppliancePayload`, `EditCompanySiteTrafficResourcePayload`, `CreateCompanySiteVcdReplicationResourcePayload`, `EditCompanySiteVcdReplicationResourcePayload`, `EditCompanySiteVcdReplicationResourceNetworkAppliancePayload`, `CreateCompanyWelcomeEmailPayload`) for the Company repository endpoints.
 - Introduced `CreateVb365OrganizationCompanyMappingPayload`, `CreateVb365Microsoft365OrganizationPayload`, `CreateVb365BackupJobPayload`, `CreateVb365CopyJobPayload`, `EditVb365Microsoft365OrganizationPayload`, `EditVb365BackupJobPayload`, and `EditVb365CopyJobPayload` to cover Microsoft 365 server request bodies.
 
@@ -38,6 +39,8 @@
 - Updated `ManagementAgentsRepository::patchManagementAgent` to accept the dedicated `EditManagementAgentPayload` type.
 - Updated `OrganizationRepository` to require the dedicated organization payload builders on each body-bearing endpoint.
 - Updated `Microsoft365ServerRepository` to type-hint the new Veeam Backup for Microsoft 365 payload builders on mapping, organization, backup job, and copy job endpoints.
+- Updated `PulseRepository` to require the VCSP Pulse payload builders across configuration, license, and tenant PATCH/POST methods.
+- Renamed `AddLicenseToVCSPPulsePayload` → `CreatePulseLicensePayload` and `ModifyLicenseManagedInVCSPPulsePayload` → `EditPulseLicensePayload`, and updated `EditPulseTenantPayload` with JSON Patch helper methods.
 
 ## v2.0 - 2025-10-13
 ### Added
