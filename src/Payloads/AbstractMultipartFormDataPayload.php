@@ -11,25 +11,51 @@ abstract class AbstractMultipartFormDataPayload extends GenericPayload {
 		parent::__construct('multipart/form-data; boundary=' . $this->boundary);
 	}
 
-	final protected function serializeBody(): string {
-		$lines = [];
+        final protected function serializeBody(): string {
+                $lines = [];
 
-		foreach ($this->formFields() as $name => $value) {
-			if ($value === null) {
-				continue;
-			}
+                foreach ($this->formFields() as $name => $value) {
+                        if ($value === null) {
+                                continue;
+                        }
 
-			$lines[] = '--' . $this->boundary;
-			$lines[] = 'Content-Disposition: form-data; name="' . $name . '"';
-			$lines[] = '';
-			$lines[] = (string) $value;
-		}
+                        $lines[] = '--' . $this->boundary;
 
-		$lines[] = '--' . $this->boundary . '--';
-		$lines[] = '';
+                        $disposition = 'Content-Disposition: form-data; name="' . $name . '"';
 
-		return implode("\r\n", $lines);
-	}
+                        if (is_array($value)) {
+                                $contents = $value['contents'] ?? null;
+
+                                if ($contents === null) {
+                                        continue;
+                                }
+
+                                if (isset($value['filename'])) {
+                                        $disposition .= '; filename="' . $value['filename'] . '"';
+                                }
+
+                                $lines[] = $disposition;
+
+                                if (isset($value['contentType'])) {
+                                        $lines[] = 'Content-Type: ' . $value['contentType'];
+                                }
+
+                                $lines[] = '';
+                                $lines[] = (string) $contents;
+
+                                continue;
+                        }
+
+                        $lines[] = $disposition;
+                        $lines[] = '';
+                        $lines[] = (string) $value;
+                }
+
+                $lines[] = '--' . $this->boundary . '--';
+                $lines[] = '';
+
+                return implode("\r\n", $lines);
+        }
 
 	abstract protected function formFields(): array;
 

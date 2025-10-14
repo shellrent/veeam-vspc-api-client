@@ -6,12 +6,14 @@
 - `CreateLinuxBackupAgentJobConfigurationPayload` and `EditLinuxBackupAgentJobConfigurationPayload` for Linux job configuration requests.
 - `AbstractJsonPayload` and `JsonPatchPayload` helpers to simplify JSON payload authoring.
 - `AbstractFormUrlEncodedPayload` and `AbstractMultipartFormDataPayload` helpers to cover URL-encoded and multipart form submissions.
+- `AbstractLicenseUploadPayload`, `ReplaceBackupServerLicensePayload`, `ReplaceSiteLicensePayload`, `ReplaceVb365ServerLicensePayload`, `ReplaceVOneServerLicensePayload`, and `ReplaceConsoleLicensePayload` to streamline license file uploads.
 - `CreateAuthenticationAsymmetricAlgorithmChallengePayload`, `EditAuthenticationAsymmetricAlgorithmChallengePayload`, `CreateAuthenticationPkcs12DecryptionPayload`, `CreateAuthenticationRefreshTokenPayload`, `CreateAuthenticationUsernamePasswordPayload`, and `CreateAuthenticationOAuthTokenPayload` for the authentication endpoints.
 - `EditBackupAgentPayload`, `EditWindowsBackupAgentSettingsPayload`, and `ReplaceWindowsBackupAgentSettingsPayload` for backup agent PATCH and PUT request bodies.
 - `CreateLinuxBackupPolicyPayload`, `CreateWindowsBackupPolicyPayload`, `EditBackupPolicyPayload`, `EditLinuxBackupPolicyPayload`, and `EditWindowsBackupPolicyPayload` to cover backup policy request bodies.
 - `EditBackupServerJobPayload` to build JSON Patch bodies for backup server job updates.
 - `CreateBackupServerIsoPredownloadPayload`, `CreateBackupServerUpgradePayload`, `CreateBackupServerPatchPayload`, `CreateBackupServerMultipartPatchPayload`, `CreateBackupServerScheduledUpgradePayload`, `CreateBackupServerScheduledPatchPayload`, `CreateBackupServerVirtualCenterObjectsExpansionPayload`, `CreateBackupServerVcdObjectsExpansionPayload`, `CreateBackupServerStandardCredentialsPayload`, `CreateBackupServerLinuxCredentialsPayload`, and `CreateBackupServerEncryptionPasswordPayload` for backup server upgrade, patch, credential, encryption, and inventory expansion requests.
  - `EditCloudConnectSitePayload`, `ModifyCloudConnectSiteMaintenanceModePayload`, and `ModifyCloudConnectSiteTenantManagementModePayload` for Cloud Connect site updates and mode toggles.
+ - `EditLicensingReportsSettingsPayload`, `EditBackupServerLicensePayload`, `EditSiteLicensePayload`, `EditVOneServerLicensePayload`, and `EditVb365ServerLicensePayload` to provide JSON Patch helpers for licensing updates.
  - Added company payload builders (`CreateCompanyPayload`, `EditCompanyPayload`, `CreateCompanyVb365ResourcePayload`, `EditCompanyVb365ResourcePayload`, `CreateCompanyVb365BackupResourcePayload`, `EditCompanyVb365BackupResourcePayload`, `CreateCompanyHostedVbrResourcePayload`, `EditCompanyHostedVbrResourcePayload`, `CreateCompanyHostedVbrBackupResourcePayload`, `EditCompanyHostedVbrBackupResourcePayload`, `CreateCompanyHostedVbrTagResourcePayload`, `EditCompanyPermissionsPayload`, `CreateCompanySiteResourcePayload`, `EditCompanySiteResourcePayload`, `CreateCompanySiteBackupResourcePayload`, `EditCompanySiteBackupResourcePayload`, `CreateCompanySiteReplicationResourcePayload`, `EditCompanySiteReplicationResourcePayload`, `EditCompanySiteReplicationResourceNetworkAppliancePayload`, `EditCompanySiteTrafficResourcePayload`, `CreateCompanySiteVcdReplicationResourcePayload`, `EditCompanySiteVcdReplicationResourcePayload`, `EditCompanySiteVcdReplicationResourceNetworkAppliancePayload`, `CreateCompanyWelcomeEmailPayload`) for the Company repository endpoints.
 
 ### Changed
@@ -26,6 +28,8 @@
  - Updated `CloudConnectRepository` to require the dedicated Cloud Connect payload builders for site modifications and maintenance or tenant management toggles.
  - Updated `CompanyRepository` to require the dedicated company payload builders on each POST and PATCH operation.
  - Renamed `CreateCompanyMicrosoft365ResourcePayload` → `CreateCompanyVb365ResourcePayload`, `CreateCompanyMicrosoft365BackupResourcePayload` → `CreateCompanyVb365BackupResourcePayload`, `CreateCompanyBackupResourcePayload` → `CreateCompanySiteBackupResourcePayload`, and `EditCompanyBackupResourcePayload` → `EditCompanySiteBackupResourcePayload`, replacing `ModifyCompanyPayload` with `EditCompanyPayload` and `ModifyCompanyResourcePayload` with `EditCompanyVb365BackupResourcePayload`.
+- Updated `AbstractMultipartFormDataPayload` to support filename and content type metadata when serializing multipart bodies.
+- Updated `LicensingRepository` to require the dedicated licensing payload builders for all body-bearing operations.
 
 ## v2.0 - 2025-10-13
 ### Added
