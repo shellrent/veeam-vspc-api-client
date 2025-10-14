@@ -15,6 +15,7 @@
  - `EditCloudConnectSitePayload`, `ModifyCloudConnectSiteMaintenanceModePayload`, and `ModifyCloudConnectSiteTenantManagementModePayload` for Cloud Connect site updates and mode toggles.
  - `EditLicensingReportsSettingsPayload`, `EditBackupServerLicensePayload`, `EditSiteLicensePayload`, `EditVOneServerLicensePayload`, and `EditVb365ServerLicensePayload` to provide JSON Patch helpers for licensing updates.
 - `CreateLocationPayload` and `EditLocationPayload` to provide typed request bodies for Location endpoints.
+ - `EditManagementAgentPayload` to supply a JSON Patch helper for management agent updates.
  - Added company payload builders (`CreateCompanyPayload`, `EditCompanyPayload`, `CreateCompanyVb365ResourcePayload`, `EditCompanyVb365ResourcePayload`, `CreateCompanyVb365BackupResourcePayload`, `EditCompanyVb365BackupResourcePayload`, `CreateCompanyHostedVbrResourcePayload`, `EditCompanyHostedVbrResourcePayload`, `CreateCompanyHostedVbrBackupResourcePayload`, `EditCompanyHostedVbrBackupResourcePayload`, `CreateCompanyHostedVbrTagResourcePayload`, `EditCompanyPermissionsPayload`, `CreateCompanySiteResourcePayload`, `EditCompanySiteResourcePayload`, `CreateCompanySiteBackupResourcePayload`, `EditCompanySiteBackupResourcePayload`, `CreateCompanySiteReplicationResourcePayload`, `EditCompanySiteReplicationResourcePayload`, `EditCompanySiteReplicationResourceNetworkAppliancePayload`, `EditCompanySiteTrafficResourcePayload`, `CreateCompanySiteVcdReplicationResourcePayload`, `EditCompanySiteVcdReplicationResourcePayload`, `EditCompanySiteVcdReplicationResourceNetworkAppliancePayload`, `CreateCompanyWelcomeEmailPayload`) for the Company repository endpoints.
 
 ### Changed
@@ -32,6 +33,7 @@
 - Updated `AbstractMultipartFormDataPayload` to support filename and content type metadata when serializing multipart bodies.
 - Updated `LicensingRepository` to require the dedicated licensing payload builders for all body-bearing operations.
 - Updated `LocationRepository` to require the dedicated location payload builders for create and patch operations.
+ - Updated `ManagementAgentsRepository::patchManagementAgent` to accept the dedicated `EditManagementAgentPayload` type.
 
 ## v2.0 - 2025-10-13
 ### Added
