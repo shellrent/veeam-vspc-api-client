@@ -2,7 +2,16 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateOrganizationCustomWelcomeEmailTemplatePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateOrganizationNotificationOAuth2SignInPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateOrganizationNotificationSmtpTestPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateOrganizationNotificationTestEmailPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditOrganizationAutoDeploymentSettingsPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditOrganizationBrandingSettingsPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditOrganizationCustomWelcomeEmailTemplatePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditOrganizationNotificationSettingsPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditOrganizationPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditOrganizationPolicySettingsPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePostRequest;
@@ -59,7 +68,7 @@ class OrganizationRepository implements Repository {
 	 * Modify Organization Modifies an organization with the specified UID.
 	 * Path: /organizations/{organizationUid}
 	 */
-	public function patchOrganization(string $organizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchOrganization(string $organizationUid, ?EditOrganizationPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s', $organizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -111,7 +120,7 @@ class OrganizationRepository implements Repository {
 	 * Modify Organization Automatic Deployment Settings Modifies Veeam backup agent automatic deployment settings configured for an organization with the specified UID.
 	 * Path: /organizations/{organizationUid}/configuration/autodeployment
 	 */
-	public function patchOrganizationAutoDeploymentSettings(string $organizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchOrganizationAutoDeploymentSettings(string $organizationUid, ?EditOrganizationAutoDeploymentSettingsPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/configuration/autodeployment', $organizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -135,7 +144,7 @@ class OrganizationRepository implements Repository {
 	 * Modify Organization Branding Settings Modifies branding settings of an organization with the specified UID.
 	 * Path: /organizations/{organizationUid}/configuration/branding
 	 */
-	public function patchOrganizationBrandingSettings(string $organizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchOrganizationBrandingSettings(string $organizationUid, ?EditOrganizationBrandingSettingsPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/configuration/branding', $organizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -183,7 +192,7 @@ class OrganizationRepository implements Repository {
 	 * Modify Organization Notification Settings Modifies notification settings of an organization with the specified UID.
 	 * Path: /organizations/{organizationUid}/configuration/notification
 	 */
-	public function patchOrganizationNotificationSettings(string $organizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchOrganizationNotificationSettings(string $organizationUid, ?EditOrganizationNotificationSettingsPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/configuration/notification', $organizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -195,7 +204,7 @@ class OrganizationRepository implements Repository {
 	 * Send SMTP Server OAuth 2.0 Authorization Request Sends an OAuth 2.0 authorization request to access an SMTP server for an organization with the specified UID.
 	 * Path: /organizations/{organizationUid}/configuration/notification/oauth2/signin
 	 */
-	public function prepareSmtpOAuth2SignIn(string $organizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function prepareSmtpOAuth2SignIn(string $organizationUid, ?CreateOrganizationNotificationOAuth2SignInPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/configuration/notification/oauth2/signin', $organizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -219,7 +228,7 @@ class OrganizationRepository implements Repository {
 	 * Test SMTP Server Settings Checks provided SMTP server settings. Returns updated and corrected settings and additional information on SMTP server.
 	 * Path: /organizations/{organizationUid}/configuration/notification/smtp/test
 	 */
-	public function testNotificationSmtpSettings(string $organizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function testNotificationSmtpSettings(string $organizationUid, ?CreateOrganizationNotificationSmtpTestPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/configuration/notification/smtp/test', $organizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -231,7 +240,7 @@ class OrganizationRepository implements Repository {
 	 * Test Email Notifications Sends test email message with the specified settings.
 	 * Path: /organizations/{organizationUid}/configuration/notification/test
 	 */
-	public function sendTestNotificationEmail(string $organizationUid, ?Payload $payload = null): RequestBuilder {
+        public function sendTestNotificationEmail(string $organizationUid, ?CreateOrganizationNotificationTestEmailPayload $payload = null): RequestBuilder {
 		return $this->createPostRequest(sprintf( '/%s/configuration/notification/test', $organizationUid ), $payload);
 	}
 
@@ -251,7 +260,7 @@ class OrganizationRepository implements Repository {
 	 * Modify Custom Settings of Organization Email Notifications Modifies custom settings configured for email notification of an organization with the specified UID.
 	 * Path: /organizations/{organizationUid}/configuration/notification/welcomeEmail
 	 */
-	public function patchCustomWelcomeEmailTemplate(string $organizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCustomWelcomeEmailTemplate(string $organizationUid, ?EditOrganizationCustomWelcomeEmailTemplatePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/configuration/notification/welcomeEmail', $organizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -263,7 +272,7 @@ class OrganizationRepository implements Repository {
 	 * Configure Custom Settings for Organization Email Notifications Configures custom settings for email notifications of an organization with the specified UID.
 	 * Path: /organizations/{organizationUid}/configuration/notification/welcomeEmail
 	 */
-	public function createCustomWelcomeEmailTemplate(string $organizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCustomWelcomeEmailTemplate(string $organizationUid, ?CreateOrganizationCustomWelcomeEmailTemplatePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/configuration/notification/welcomeEmail', $organizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -287,7 +296,7 @@ class OrganizationRepository implements Repository {
 	 * Modify Organization Policy Settings Modifies policy settings configured for an organization with the specified UID.
 	 * Path: /organizations/{organizationUid}/configuration/policy
 	 */
-	public function patchOrganizationPolicySettings(string $organizationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchOrganizationPolicySettings(string $organizationUid, ?EditOrganizationPolicySettingsPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/configuration/policy', $organizationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
