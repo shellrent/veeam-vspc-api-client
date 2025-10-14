@@ -2,7 +2,8 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateLocationPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditLocationPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -35,7 +36,7 @@ class LocationRepository implements Repository {
 	 * Create Location Creates a new organization location.
 	 * Path: /organizations/locations
 	 */
-	public function createLocation(?Payload $payload = null, array $query = []): RequestBuilder {
+	public function createLocation(CreateLocationPayload $payload, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest('/locations', $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -67,7 +68,7 @@ class LocationRepository implements Repository {
 	 * Modify Location Modifies an organization location.
 	 * Path: /organizations/locations/{locationUid}
 	 */
-	public function patchLocation(string $locationUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+	public function patchLocation(string $locationUid, EditLocationPayload $payload, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/locations/%s', $locationUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
