@@ -2,7 +2,16 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditBackupServerLicensePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditLicensingReportsSettingsPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditSiteLicensePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditVOneServerLicensePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditVb365ServerLicensePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\ReplaceBackupServerLicensePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\ReplaceConsoleLicensePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\ReplaceSiteLicensePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\ReplaceVOneServerLicensePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\ReplaceVb365ServerLicensePayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -61,24 +70,24 @@ class LicensingRepository implements Repository {
 	 * Modify Veeam Backup & Replication License Modifies a license on a managed Veeam Backup & Replication server with the specified UID.
 	 * Path: /licensing/backupServers/{backupServerUid}
 	 */
-	public function patchBackupServerLicense(string $backupServerUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPatchRequest(sprintf( '/backupServers/%s', $backupServerUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
-	}
+        public function patchBackupServerLicense(string $backupServerUid, EditBackupServerLicensePayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPatchRequest(sprintf( '/backupServers/%s', $backupServerUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
+        }
 
 	/**
 	 * Install Veeam Backup & Replication License Install a license on a managed Veeam Backup & Replication server with the specified UID.
 	 * Path: /licensing/backupServers/{backupServerUid}
 	 */
-	public function installBackupServerLicense(string $backupServerUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPutRequest(sprintf( '/backupServers/%s', $backupServerUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
+        public function installBackupServerLicense(string $backupServerUid, ReplaceBackupServerLicensePayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPutRequest(sprintf( '/backupServers/%s', $backupServerUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
 	}
 
 	/**
@@ -109,12 +118,12 @@ class LicensingRepository implements Repository {
 	 * Install Veeam Service Provider Console License Installs Veeam Service Provider Console license.
 	 * Path: /licensing/console
 	 */
-	public function installConsoleLicense(?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPutRequest('/console', $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
+        public function installConsoleLicense(ReplaceConsoleLicensePayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPutRequest('/console', $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
 	}
 
 	/**
@@ -193,12 +202,12 @@ class LicensingRepository implements Repository {
 	 * Modify License Usage Report Settings Modifies the Veeam licenses usage reports settings.
 	 * Path: /licensing/reports/settings
 	 */
-	public function patchLicensingReportsSettings(?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPatchRequest('/reports/settings', $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
+        public function patchLicensingReportsSettings(EditLicensingReportsSettingsPayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPatchRequest('/reports/settings', $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
 	}
 
 	/**
@@ -249,24 +258,24 @@ class LicensingRepository implements Repository {
 	 * Modify Site License Modifies a license on a Veeam Cloud Connect site with the specified UID.
 	 * Path: /licensing/sites/{siteUid}
 	 */
-	public function patchSiteLicense(string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPatchRequest(sprintf( '/sites/%s', $siteUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
-	}
+        public function patchSiteLicense(string $siteUid, EditSiteLicensePayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPatchRequest(sprintf( '/sites/%s', $siteUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
+        }
 
 	/**
 	 * Install Site License Installs a license on the Veeam Cloud Connect site with the specified UID.
 	 * Path: /licensing/sites/{siteUid}
 	 */
-	public function installSiteLicense(string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPutRequest(sprintf( '/sites/%s', $siteUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
+        public function installSiteLicense(string $siteUid, ReplaceSiteLicensePayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPutRequest(sprintf( '/sites/%s', $siteUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
 	}
 
 	/**
@@ -321,24 +330,24 @@ class LicensingRepository implements Repository {
 	 * Modify Veeam Backup for Microsoft 365 License Modifies a license on a managed Veeam Backup for Microsoft 365 server with the specified UID.
 	 * Path: /licensing/vb365Servers/{vb365ServerUid}
 	 */
-	public function patchVb365ServerLicense(string $vb365ServerUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPatchRequest(sprintf( '/vb365Servers/%s', $vb365ServerUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
+        public function patchVb365ServerLicense(string $vb365ServerUid, EditVb365ServerLicensePayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPatchRequest(sprintf( '/vb365Servers/%s', $vb365ServerUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
 	}
 
 	/**
 	 * Install Veeam Backup for Microsoft 365 License Install a license on a managed Veeam Backup for Microsoft 365 server with the specified UID.
 	 * Path: /licensing/vb365Servers/{vb365ServerUid}
 	 */
-	public function installVb365ServerLicense(string $vb365ServerUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPutRequest(sprintf( '/vb365Servers/%s', $vb365ServerUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
+        public function installVb365ServerLicense(string $vb365ServerUid, ReplaceVb365ServerLicensePayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPutRequest(sprintf( '/vb365Servers/%s', $vb365ServerUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
 	}
 
 	/**
@@ -389,25 +398,25 @@ class LicensingRepository implements Repository {
 	 * Modify Veeam One License Modifies a license on a managed Veeam One server with the specified UID.
 	 * Path: /licensing/voneServers/{vOneServerUid}
 	 */
-	public function patchVOneServerLicense(string $vOneServerUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPatchRequest(sprintf( '/voneServers/%s', $vOneServerUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
-	}
+        public function patchVOneServerLicense(string $vOneServerUid, EditVOneServerLicensePayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPatchRequest(sprintf( '/voneServers/%s', $vOneServerUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
+        }
 
-	/**
-	 * Install Veeam One License Install a license on a managed Veeam One server with the specified UID.
-	 * Path: /licensing/voneServers/{vOneServerUid}
-	 */
-	public function installVOneServerLicense(string $vOneServerUid, ?Payload $payload = null, array $query = []): RequestBuilder {
-		$request = $this->createPutRequest(sprintf( '/voneServers/%s', $vOneServerUid ), $payload);
-		if ($query !== []) {
-			$request->query($query);
-		}
-		return $request;
-	}
+        /**
+         * Install Veeam One License Install a license on a managed Veeam One server with the specified UID.
+         * Path: /licensing/voneServers/{vOneServerUid}
+         */
+        public function installVOneServerLicense(string $vOneServerUid, ReplaceVOneServerLicensePayload $payload, array $query = []): RequestBuilder {
+                $request = $this->createPutRequest(sprintf( '/voneServers/%s', $vOneServerUid ), $payload);
+                if ($query !== []) {
+                        $request->query($query);
+                }
+                return $request;
+        }
 
 	/**
 	 * Update Veeam One License Downloads a new license from the Internet and installs it on a Veeam One server.

@@ -2,7 +2,30 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyHostedVbrBackupResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyHostedVbrResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyHostedVbrTagResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanySiteBackupResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanySiteReplicationResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanySiteResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanySiteVcdReplicationResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyVb365BackupResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyVb365ResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyWelcomeEmailPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanyHostedVbrBackupResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanyHostedVbrResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanyPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanyPermissionsPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanySiteBackupResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanySiteReplicationResourceNetworkAppliancePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanySiteReplicationResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanySiteResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanySiteTrafficResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanySiteVcdReplicationResourceNetworkAppliancePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanySiteVcdReplicationResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanyVb365BackupResourcePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditCompanyVb365ResourcePayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -35,7 +58,7 @@ class CompanyRepository implements Repository {
 	 * Create Company Creates a new company managed in Veeam Service Provider Console. > After you create a company, you must create a company Veeam Cloud Connect site resource by performing the `CreateCompanySiteResource` operation.
 	 * Path: /organizations/companies
 	 */
-	public function createCompany(?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCompany(?CreateCompanyPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest('', $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -239,7 +262,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Modifies a company managed in Veeam Service Provider Console.
 	 * Path: /organizations/companies/{companyUid}
 	 */
-	public function patchCompany(string $companyUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompany(string $companyUid, ?EditCompanyPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s', $companyUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -263,7 +286,7 @@ class CompanyRepository implements Repository {
 	 * Create Company Veeam Backup for Microsoft 365 Resource Allocates a Veeam Backup for Microsoft 365 resource to a company with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/hostedResources/vb365
 	 */
-	public function createCompanyVb365Resource(string $companyUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCompanyVb365Resource(string $companyUid, ?CreateCompanyVb365ResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/hostedResources/vb365', $companyUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -295,7 +318,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Veeam Backup for Microsoft 365 Resource Modifies a company Veeam Backup for Microsoft 365 resource with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/hostedResources/vb365/{vb365ResourceUid}
 	 */
-	public function patchCompanyVb365Resource(string $companyUid, string $vb365ResourceUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanyVb365Resource(string $companyUid, string $vb365ResourceUid, ?EditCompanyVb365ResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/hostedResources/vb365/%s', $companyUid, $vb365ResourceUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -319,7 +342,7 @@ class CompanyRepository implements Repository {
 	 * Create Company Veeam Backup for Microsoft 365 Backup Resource Allocates a new backup resource to a company on a Veeam Backup for Microsoft 365 resource with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/hostedResources/vb365/{vb365ResourceUid}/backupResources
 	 */
-	public function createCompanyVb365BackupResource(string $companyUid, string $vb365ResourceUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCompanyVb365BackupResource(string $companyUid, string $vb365ResourceUid, ?CreateCompanyVb365BackupResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/hostedResources/vb365/%s/backupResources', $companyUid, $vb365ResourceUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -351,7 +374,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Veeam Backup for Microsoft 365 Backup Resource Modifies a company Veeam Backup for Microsoft 365 backup resource with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/hostedResources/vb365/{vb365ResourceUid}/backupResources/{vb365BackupResourceUid}
 	 */
-	public function patchCompanyVb365BackupResource(string $companyUid, string $vb365ResourceUid, string $vb365BackupResourceUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanyVb365BackupResource(string $companyUid, string $vb365ResourceUid, string $vb365BackupResourceUid, ?EditCompanyVb365BackupResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/hostedResources/vb365/%s/backupResources/%s', $companyUid, $vb365ResourceUid, $vb365BackupResourceUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -375,7 +398,7 @@ class CompanyRepository implements Repository {
 	 * Create Company Hosted Server Resource Allocates a hosted Veeam Backup & Replication server resource to a company with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/hostedResources/vbr
 	 */
-	public function createCompanyHostedVbrResource(string $companyUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCompanyHostedVbrResource(string $companyUid, ?CreateCompanyHostedVbrResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/hostedResources/vbr', $companyUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -407,7 +430,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Hosted Server Resource Modifies a company hosted Veeam Backup & Replication server resource with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/hostedResources/vbr/{vbrHostedResourceUid}
 	 */
-	public function patchCompanyHostedVbrResource(string $companyUid, string $vbrHostedResourceUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanyHostedVbrResource(string $companyUid, string $vbrHostedResourceUid, ?EditCompanyHostedVbrResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/hostedResources/vbr/%s', $companyUid, $vbrHostedResourceUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -431,7 +454,7 @@ class CompanyRepository implements Repository {
 	 * Create Company Hosted Repository Resource Allocates a new Veeam Backup & Replication repository resource to a company on a hosted Veeam Backup & Replication server resource with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/hostedResources/vbr/{vbrHostedResourceUid}/backupResources
 	 */
-	public function createCompanyHostedVbrBackupResource(string $companyUid, string $vbrHostedResourceUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCompanyHostedVbrBackupResource(string $companyUid, string $vbrHostedResourceUid, ?CreateCompanyHostedVbrBackupResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/hostedResources/vbr/%s/backupResources', $companyUid, $vbrHostedResourceUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -463,7 +486,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Hosted Repository Resource Modifies a company hosted Veeam Backup & Replication repository resource with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/hostedResources/vbr/{vbrHostedResourceUid}/backupResources/{hostedVbrBackupResourceUid}
 	 */
-	public function patchCompanyHostedVbrBackupResource(string $companyUid, string $vbrHostedResourceUid, string $hostedVbrBackupResourceUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanyHostedVbrBackupResource(string $companyUid, string $vbrHostedResourceUid, string $hostedVbrBackupResourceUid, ?EditCompanyHostedVbrBackupResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/hostedResources/vbr/%s/backupResources/%s', $companyUid, $vbrHostedResourceUid, $hostedVbrBackupResourceUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -531,7 +554,7 @@ class CompanyRepository implements Repository {
 	 * Create Tag Resource on Company Hosted Server Resource Allocates a new tag resource to a company on a hosted Veeam Backup & Replication server resource with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/hostedResources/vbr/{vbrHostedResourceUid}/tagResources
 	 */
-	public function createCompanyHostedVbrTagResource(string $companyUid, string $vbrHostedResourceUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCompanyHostedVbrTagResource(string $companyUid, string $vbrHostedResourceUid, ?CreateCompanyHostedVbrTagResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/hostedResources/vbr/%s/tagResources', $companyUid, $vbrHostedResourceUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -575,7 +598,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Permissions Modifies a set of the Veeam Service Provider Console components that a company with the specified UID can access.
 	 * Path: /organizations/companies/{companyUid}/permissions
 	 */
-	public function patchCompanyPermissions(string $companyUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanyPermissions(string $companyUid, ?EditCompanyPermissionsPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/permissions', $companyUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -599,7 +622,7 @@ class CompanyRepository implements Repository {
 	 * Create Company Site Resource Allocates a new site resource to a company with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites
 	 */
-	public function createCompanySiteResource(string $companyUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCompanySiteResource(string $companyUid, ?CreateCompanySiteResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/sites', $companyUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -635,7 +658,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Site Resource Modifies a company site resource with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites/{siteUid}
 	 */
-	public function patchCompanySiteResource(string $companyUid, string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanySiteResource(string $companyUid, string $siteUid, ?EditCompanySiteResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/sites/%s', $companyUid, $siteUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -659,7 +682,7 @@ class CompanyRepository implements Repository {
 	 * Creates Company Backup Resource on Site Allocate a new cloud backup resource to a company with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites/{siteUid}/backupResources
 	 */
-	public function createCompanySiteBackupResource(string $companyUid, string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCompanySiteBackupResource(string $companyUid, string $siteUid, ?CreateCompanySiteBackupResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/sites/%s/backupResources', $companyUid, $siteUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -703,7 +726,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Backup Resource Modifies a company cloud backup resource with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites/{siteUid}/backupResources/{resourceUid}
 	 */
-	public function patchCompanySiteBackupResource(string $companyUid, string $siteUid, string $resourceUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanySiteBackupResource(string $companyUid, string $siteUid, string $resourceUid, ?EditCompanySiteBackupResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/sites/%s/backupResources/%s', $companyUid, $siteUid, $resourceUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -727,7 +750,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Replication Resource on Site Modifies a cloud replication resource allocated to a company on a Veeam Cloud Connect site with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites/{siteUid}/replicationResources
 	 */
-	public function patchCompanySiteReplicationResource(string $companyUid, string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanySiteReplicationResource(string $companyUid, string $siteUid, ?EditCompanySiteReplicationResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/sites/%s/replicationResources', $companyUid, $siteUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -739,7 +762,7 @@ class CompanyRepository implements Repository {
 	 * Create Company Replication Resource on Site Allocates a new cloud replication resource to a company on a Veeam Cloud Connect site with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites/{siteUid}/replicationResources
 	 */
-	public function createCompanySiteReplicationResource(string $companyUid, string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCompanySiteReplicationResource(string $companyUid, string $siteUid, ?CreateCompanySiteReplicationResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/sites/%s/replicationResources', $companyUid, $siteUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -795,7 +818,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Network Extension Appliance Modifies a company network extension appliance with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites/{siteUid}/replicationResources/networkextensionAppliance/{applianceUid}
 	 */
-	public function patchCompanySiteReplicationResourcesNetworkAppliance(string $companyUid, string $siteUid, string $applianceUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanySiteReplicationResourcesNetworkAppliance(string $companyUid, string $siteUid, string $applianceUid, ?EditCompanySiteReplicationResourceNetworkAppliancePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/sites/%s/replicationResources/networkextensionAppliance/%s', $companyUid, $siteUid, $applianceUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -831,7 +854,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Traffic Resource Modifies cloud traffic quota configured for a company on a Veeam Cloud Connect site with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites/{siteUid}/traffic
 	 */
-	public function patchCompanySiteTrafficResource(string $companyUid, string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanySiteTrafficResource(string $companyUid, string $siteUid, ?EditCompanySiteTrafficResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/sites/%s/traffic', $companyUid, $siteUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -855,7 +878,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company VMware Cloud Director Replication Resource Modifies a VMware Cloud Director replication resource allocated to a company on a Veeam Cloud Connect site with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites/{siteUid}/vcdReplicationResources
 	 */
-	public function patchCompanySiteVcdReplicationResource(string $companyUid, string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanySiteVcdReplicationResource(string $companyUid, string $siteUid, ?EditCompanySiteVcdReplicationResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/sites/%s/vcdReplicationResources', $companyUid, $siteUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -867,7 +890,7 @@ class CompanyRepository implements Repository {
 	 * Create Company VMware Cloud Director Replication Resource on Site Allocates a new VMware Cloud Director replication resource to a company with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites/{siteUid}/vcdReplicationResources
 	 */
-	public function createCompanySiteVcdReplicationResource(string $companyUid, string $siteUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createCompanySiteVcdReplicationResource(string $companyUid, string $siteUid, ?CreateCompanySiteVcdReplicationResourcePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf( '/%s/sites/%s/vcdReplicationResources', $companyUid, $siteUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -923,7 +946,7 @@ class CompanyRepository implements Repository {
 	 * Modify Company Network Extension Appliance Modifies a company network extension appliance with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/sites/{siteUid}/vcdReplicationResources/networkExtensionAppliance/{applianceUid}
 	 */
-	public function patchCompanySiteVcdReplicationResourcesNetworkAppliance(string $companyUid, string $siteUid, string $applianceUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchCompanySiteVcdReplicationResourcesNetworkAppliance(string $companyUid, string $siteUid, string $applianceUid, ?EditCompanySiteVcdReplicationResourceNetworkAppliancePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/%s/sites/%s/vcdReplicationResources/networkExtensionAppliance/%s', $companyUid, $siteUid, $applianceUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -959,7 +982,7 @@ class CompanyRepository implements Repository {
 	 * Send Welcome Email to Company Sends a welcome email to a company with the specified UID.
 	 * Path: /organizations/companies/{companyUid}/welcomeEmail
 	 */
-	public function sendWelcomeEmailToCompany(string $companyUid, ?Payload $payload = null): RequestBuilder {
+        public function sendWelcomeEmailToCompany(string $companyUid, ?CreateCompanyWelcomeEmailPayload $payload = null): RequestBuilder {
 		return $this->createPostRequest(sprintf( '/%s/welcomeEmail', $companyUid ), $payload);
 	}
 }

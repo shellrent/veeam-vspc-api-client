@@ -2,7 +2,7 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditManagementAgentPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -95,7 +95,7 @@ class ManagementAgentsRepository implements Repository {
 	 * Modify Management Agent Modifies a management agent with the specified UID.
 	 * Path: /infrastructure/managementAgents/{managementAgentUid}
 	 */
-	public function patchManagementAgent(string $managementAgentUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchManagementAgent(string $managementAgentUid, EditManagementAgentPayload $payload, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/managementAgents/%s', $managementAgentUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);

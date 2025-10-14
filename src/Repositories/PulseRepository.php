@@ -2,7 +2,10 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreatePulseLicensePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditPulseConfigurationPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditPulseLicensePayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditPulseTenantPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -35,7 +38,7 @@ class PulseRepository implements Repository {
 	 * Modify VCSP Pulse Configuration Modifies VCSP Pulse plugin configuration. > To disconnect the plugin, replace the `token` property value with `null`.
 	 * Path: /pulse
 	 */
-	public function patchPulseConfiguration(?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchPulseConfiguration(?EditPulseConfigurationPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest('', $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -71,7 +74,7 @@ class PulseRepository implements Repository {
 	 * Add License to VCSP Pulse Adds a new license configuration with the specified parameters to VCSP Pulse.
 	 * Path: /pulse/licenses
 	 */
-	public function createPulseLicense(?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createPulseLicense(?CreatePulseLicensePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest('/licenses', $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -103,7 +106,7 @@ class PulseRepository implements Repository {
 	 * Modify License Managed in VCSP Pulse Modifies a license managed in VCSP Pulse with the specified UID.
 	 * Path: /pulse/licenses/{licenseUid}
 	 */
-	public function patchPulseLicense(string $licenseUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchPulseLicense(string $licenseUid, ?EditPulseLicensePayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/licenses/%s', $licenseUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -215,7 +218,7 @@ class PulseRepository implements Repository {
 	 * Modify VCSP Pulse Tenant Modifies a VCSP Pulse tenant with the specified UID.
 	 * Path: /pulse/tenants/{tenantUid}
 	 */
-	public function patchPulseTenant(string $tenantUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchPulseTenant(string $tenantUid, ?EditPulseTenantPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/tenants/%s', $tenantUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);

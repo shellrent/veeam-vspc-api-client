@@ -6,7 +6,7 @@ A PHP SDK for integrating with the [Veeam Service Provider Console (VSPC)](https
 - Guzzle-based HTTP client preconfigured for the VSPC REST endpoints.
 - Repository classes mirroring the API tags (Alarms, Authentication, Backup Agents, Backup Policies, Backup Server Jobs, Backup Servers, Cloud Connect, Companies, Licensing, Locations, Management Agents, Misc, Organizations, Provider, Pulse, Microsoft 365, and more).
 - Fluent payload builders to compose request bodies for complex operations.
-- `GenericPayload` helper to quickly serialize ad-hoc request bodies when a dedicated builder is not required.
+- `GenericPayload` helper (via static factories) to quickly serialize ad-hoc request bodies when a dedicated builder is not required.
 - Helpers for filters, pagination, and query parameters.
 - Returns PSR-7 responses or decoded JSON payloads for convenience.
 
@@ -38,14 +38,19 @@ $client = new VeeamSPCClient(
 ```
 
 ### Authenticate and Fetch a Token
-Use the `AuthenticationRepository` with the `OAuthPayload` helper to request an access token.
+Use the `AuthenticationRepository` with the `CreateAuthenticationOAuthTokenPayload` helper to request an access token.
 
 ```php
-use Shellrent\VeeamVspcApiClient\Payloads\OAuthPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateAuthenticationOAuthTokenPayload;
 use Shellrent\VeeamVspcApiClient\Repositories\AuthenticationRepository;
 
 $authRepository = new AuthenticationRepository();
-$request = $authRepository->postOAuthAuthentication(new OAuthPayload('username', 'password'));
+$request = $authRepository->oAuth2IssueToken(
+    new CreateAuthenticationOAuthTokenPayload(
+        username: 'username',
+        password: 'password'
+    )
+);
 
 $tokenResponse = $client->jsonResponse($request);
 $token = $tokenResponse->access_token ?? null;
@@ -68,13 +73,13 @@ $response = $client->jsonResponse($request);
 Repositories accept optional filters and query parameters when executed through `VeeamSPCClient::send()` or `VeeamSPCClient::jsonResponse()`. You can build complex filters using `Filter` and `FilterCollection` helpers located under `Shellrent\VeeamVspcApiClient\Support`.
 
 ### Send an Ad-hoc JSON Body
-When an endpoint requires a request body that does not yet have a dedicated payload builder, you can rely on the `GenericPayload` helper. Pass an array (automatically encoded as JSON) or a raw string together with the desired content type.
+When an endpoint requires a request body that does not yet have a dedicated payload builder, you can rely on the `GenericPayload` helper. Use the provided static factories to pass an array (automatically encoded as JSON) or a raw string together with the desired content type.
 
 ```php
 use Shellrent\VeeamVspcApiClient\Payloads\GenericPayload;
 use Shellrent\VeeamVspcApiClient\Repositories\BackupPolicyRepository;
 
-$payload = new GenericPayload([
+$payload = GenericPayload::fromArray([
     'Name' => 'My Custom Policy',
     'Description' => 'Created through the SDK',
 ]);

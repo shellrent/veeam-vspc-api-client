@@ -2,7 +2,11 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateLinuxBackupAgentJobConfigurationPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateWindowsBackupAgentJobConfigurationPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditLinuxBackupAgentJobConfigurationPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditWindowsBackupAgentJobConfigurationPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditWindowsBackupAgentJobPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -104,7 +108,7 @@ class BackupAgentJobRepository implements Repository {
 	 * Modify Job for Veeam Agent for Microsoft Windows Modifies a Veeam Agent for Microsoft Windows job with the specified UID.
 	 * Path: /infrastructure/backupAgents/windows/{backupAgentUid}/jobs/{backupAgentJobUid}
 	 */
-	public function patchWindowsBackupAgentJob(string $backupAgentUid, string $backupAgentJobUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchWindowsBackupAgentJob(string $backupAgentUid, string $backupAgentJobUid, ?EditWindowsBackupAgentJobPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf('/windows/%s/jobs/%s', $backupAgentUid, $backupAgentJobUid), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -146,7 +150,7 @@ class BackupAgentJobRepository implements Repository {
 	 * Modify Configuration of Job for Veeam Agent for Microsoft Windows Modifies a configuration of the Veeam Agent for Microsoft Windows job with the specified UID.
 	 * Path: /infrastructure/backupAgents/windows/{backupAgentUid}/jobs/{backupAgentJobUid}/configuration
 	 */
-	public function patchWindowsBackupAgentJobConfiguration(string $backupAgentUid, string $backupAgentJobUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchWindowsBackupAgentJobConfiguration(string $backupAgentUid, string $backupAgentJobUid, ?EditWindowsBackupAgentJobConfigurationPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf('/windows/%s/jobs/%s/configuration', $backupAgentUid, $backupAgentJobUid), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -159,7 +163,7 @@ class BackupAgentJobRepository implements Repository {
 	 * Create Configuration of Job for Veeam Agent for Microsoft Windows Creates a configuration of a Veeam backup agent job protecting a Windows computer with the specified UID.
 	 * Path: /infrastructure/backupAgents/windows/{backupAgentUid}/jobs/configuration
 	 */
-	public function createWindowsBackupAgentJobConfiguration(string $backupAgentUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createWindowsBackupAgentJobConfiguration(string $backupAgentUid, ?CreateWindowsBackupAgentJobConfigurationPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf('/windows/%s/jobs/configuration', $backupAgentUid), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -253,7 +257,7 @@ class BackupAgentJobRepository implements Repository {
 	 * Modify Configuration of Job for Veeam Agent for Linux Modifies Veeam Agent for Linux job configuration with the specified UID.
 	 * Path: /infrastructure/backupAgents/linux/{backupAgentUid}/jobs/{backupAgentJobUid}/configuration
 	 */
-	public function patchLinuxBackupAgentJobConfiguration(string $backupAgentUid, string $backupAgentJobUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function patchLinuxBackupAgentJobConfiguration(string $backupAgentUid, string $backupAgentJobUid, ?EditLinuxBackupAgentJobConfigurationPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf('/linux/%s/jobs/%s/configuration', $backupAgentUid, $backupAgentJobUid), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -266,7 +270,7 @@ class BackupAgentJobRepository implements Repository {
 	 * Create Configuration of Job for Veeam Agent for Linux Creates configuration of a Veeam backup agent job protecting Linux computer with the specified UID.
 	 * Path: /infrastructure/backupAgents/linux/{backupAgentUid}/jobs/configuration
 	 */
-	public function createLinuxBackupAgentJobConfiguration(string $backupAgentUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+        public function createLinuxBackupAgentJobConfiguration(string $backupAgentUid, ?CreateLinuxBackupAgentJobConfigurationPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest(sprintf('/linux/%s/jobs/configuration', $backupAgentUid), $payload);
 		if ($query !== []) {
 			$request->query($query);

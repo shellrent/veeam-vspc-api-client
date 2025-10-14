@@ -2,7 +2,11 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\Payload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateLinuxBackupPolicyPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\CreateWindowsBackupPolicyPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditBackupPolicyPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditLinuxBackupPolicyPayload;
+use Shellrent\VeeamVspcApiClient\Payloads\EditWindowsBackupPolicyPayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
@@ -47,7 +51,7 @@ class BackupPolicyRepository implements Repository {
 	 * Create Backup Policy for Linux Computers Creates a backup policy for Linux computers.
 	 * Path: /configuration/backupPolicies/linux
 	 */
-	public function createLinuxBackupPolicy(?Payload $payload = null, array $query = []): RequestBuilder {
+	public function createLinuxBackupPolicy(?CreateLinuxBackupPolicyPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest('/backupPolicies/linux', $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -71,7 +75,7 @@ class BackupPolicyRepository implements Repository {
 	 * Modify Backup Policy for Linux Computers Modifies a Linux computer backup policy with the specified UID.
 	 * Path: /configuration/backupPolicies/linux/{policyUid}
 	 */
-	public function patchLinuxBackupPolicy(string $policyUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+	public function patchLinuxBackupPolicy(string $policyUid, ?EditLinuxBackupPolicyPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/backupPolicies/linux/%s', $policyUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -95,7 +99,7 @@ class BackupPolicyRepository implements Repository {
 	 * Create Backup Policy for Windows Computers Creates a backup policy for Microsoft Windows computers.
 	 * Path: /configuration/backupPolicies/windows
 	 */
-	public function createWindowsBackupPolicy(?Payload $payload = null, array $query = []): RequestBuilder {
+	public function createWindowsBackupPolicy(?CreateWindowsBackupPolicyPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPostRequest('/backupPolicies/windows', $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -119,7 +123,7 @@ class BackupPolicyRepository implements Repository {
 	 * Modify Backup Policy for Windows Computers Modifies a Windows computer backup policy with the specified UID.
 	 * Path: /configuration/backupPolicies/windows/{policyUid}
 	 */
-	public function patchWindowsBackupPolicy(string $policyUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+	public function patchWindowsBackupPolicy(string $policyUid, ?EditWindowsBackupPolicyPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/backupPolicies/windows/%s', $policyUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
@@ -151,7 +155,7 @@ class BackupPolicyRepository implements Repository {
 	 * Modify Backup Policy Modifies a backup policy with the specified UID.
 	 * Path: /configuration/backupPolicies/{policyUid}
 	 */
-	public function patchBackupPolicy(string $policyUid, ?Payload $payload = null, array $query = []): RequestBuilder {
+	public function patchBackupPolicy(string $policyUid, ?EditBackupPolicyPayload $payload = null, array $query = []): RequestBuilder {
 		$request = $this->createPatchRequest(sprintf( '/backupPolicies/%s', $policyUid ), $payload);
 		if ($query !== []) {
 			$request->query($query);
