@@ -16,10 +16,14 @@ class Microsoft365ServerRepository implements Repository {
 		return $this->createGetRequest( '' );
 	}
 	
+	public function getAllCompany(): RequestBuilder {
+		return $this->createGetRequest( '/organizations/companyMappings' );
+	}
+	
 	public function getAllRepositoriesForServer( string $vb365ServerUid ): RequestBuilder {
 		return $this->createGetRequest( sprintf( '/%s/backupRepositories', $vb365ServerUid ) );
 	}
-
+	
 	public function getAllProxiesForServer( string $vb365ServerUid ): RequestBuilder {
 		return $this->createGetRequest( sprintf( '/%s/backupProxies', $vb365ServerUid ) );
 	}
