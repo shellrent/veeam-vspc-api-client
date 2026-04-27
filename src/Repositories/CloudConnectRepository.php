@@ -9,6 +9,7 @@ use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreateGetRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePatchRequest;
 use Shellrent\VeeamVspcApiClient\Support\CreatePostRequest;
+use Shellrent\VeeamVspcApiClient\Support\Filter;
 use Shellrent\VeeamVspcApiClient\Support\RequestBuilder;
 
 class CloudConnectRepository implements Repository {
@@ -28,7 +29,12 @@ class CloudConnectRepository implements Repository {
 	public function getAllSites(): RequestBuilder {
 		return $this->createGetRequest( '' );
 	}
-	
+
+	public function getAllSitesByCompany(string $companyUid): RequestBuilder {
+		return $this->createGetRequest( '' )
+            ->filter(new Filter('assignedForCompany', Filter::OPERATION_EQUALS, $companyUid));
+	}
+
 	public function getAllCloudGatewayPools(): RequestBuilder {
 		return $this->createGetRequest( '/cloudgatewaypools' );
 	}
