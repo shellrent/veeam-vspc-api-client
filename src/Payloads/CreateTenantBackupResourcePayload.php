@@ -2,7 +2,7 @@
 
 namespace Shellrent\VeeamVspcApiClient\Payloads;
 
-class CreateCompanyBackupResourcePayload implements Payload {
+class CreateTenantBackupResourcePayload implements Payload {
 	private string $RepositoryUid;
 	
 	private string $RepositoryName;
@@ -30,9 +30,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param string $RepositoryUid
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setRepositoryUid( string $RepositoryUid ): CreateCompanyBackupResourcePayload {
+	public function setRepositoryUid( string $RepositoryUid ): CreateTenantBackupResourcePayload {
 		$this->RepositoryUid = $RepositoryUid;
 		
 		return $this;
@@ -41,9 +41,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param string $RepositoryName
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setRepositoryName( string $RepositoryName ): CreateCompanyBackupResourcePayload {
+	public function setRepositoryName( string $RepositoryName ): CreateTenantBackupResourcePayload {
 		$this->RepositoryName = $RepositoryName;
 		
 		return $this;
@@ -52,9 +52,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param string $StorageQuota
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setStorageQuota( int $StorageQuota ): CreateCompanyBackupResourcePayload {
+	public function setStorageQuota( int $StorageQuota ): CreateTenantBackupResourcePayload {
 		$this->StorageQuota = $StorageQuota;
 		
 		return $this;
@@ -63,9 +63,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param string $ServerQuota
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setServerQuota( int $ServerQuota ): CreateCompanyBackupResourcePayload {
+	public function setServerQuota( int $ServerQuota ): CreateTenantBackupResourcePayload {
 		$this->ServerQuota = $ServerQuota;
 		
 		return $this;
@@ -74,9 +74,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param string $WorkstationQuota
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setWorkstationQuota( int $WorkstationQuota ): CreateCompanyBackupResourcePayload {
+	public function setWorkstationQuota( int $WorkstationQuota ): CreateTenantBackupResourcePayload {
 		$this->WorkstationQuota = $WorkstationQuota;
 		
 		return $this;
@@ -85,9 +85,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param string $VmQuota
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setVmQuota( int $VmQuota ): CreateCompanyBackupResourcePayload {
+	public function setVmQuota( int $VmQuota ): CreateTenantBackupResourcePayload {
 		$this->VmQuota = $VmQuota;
 		
 		return $this;
@@ -96,9 +96,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param bool $IsServersQuotaUnlimited
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setIsServersQuotaUnlimited( bool $IsServersQuotaUnlimited ): CreateCompanyBackupResourcePayload {
+	public function setIsServersQuotaUnlimited( bool $IsServersQuotaUnlimited ): CreateTenantBackupResourcePayload {
 		$this->IsServersQuotaUnlimited = $IsServersQuotaUnlimited;
 
 		return $this;
@@ -107,9 +107,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param bool $IsWorkstationsQuotaUnlimited
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setIsWorkstationsQuotaUnlimited( bool $IsWorkstationsQuotaUnlimited ): CreateCompanyBackupResourcePayload {
+	public function setIsWorkstationsQuotaUnlimited( bool $IsWorkstationsQuotaUnlimited ): CreateTenantBackupResourcePayload {
 		$this->IsWorkstationsQuotaUnlimited = $IsWorkstationsQuotaUnlimited;
 
 		return $this;
@@ -118,9 +118,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param bool $IsVmsQuotaUnlimited
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setIsVmsQuotaUnlimited( bool $IsVmsQuotaUnlimited ): CreateCompanyBackupResourcePayload {
+	public function setIsVmsQuotaUnlimited( bool $IsVmsQuotaUnlimited ): CreateTenantBackupResourcePayload {
 		$this->IsVmsQuotaUnlimited = $IsVmsQuotaUnlimited;
 
 		return $this;
@@ -129,9 +129,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param bool $IsWanAccelerationEnabled
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setIsWanAccelerationEnabled( bool $IsWanAccelerationEnabled ): CreateCompanyBackupResourcePayload {
+	public function setIsWanAccelerationEnabled( bool $IsWanAccelerationEnabled ): CreateTenantBackupResourcePayload {
 		$this->IsWanAccelerationEnabled = $IsWanAccelerationEnabled;
 
 		return $this;
@@ -140,9 +140,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param string|null $WanAcceleratorUid
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setWanAcceleratorUid( ?string $WanAcceleratorUid ): CreateCompanyBackupResourcePayload {
+	public function setWanAcceleratorUid( ?string $WanAcceleratorUid ): CreateTenantBackupResourcePayload {
 		$this->WanAcceleratorUid = $WanAcceleratorUid;
 
 		return $this;
@@ -151,9 +151,9 @@ class CreateCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param bool $IsDefault
 	 *
-	 * @return CreateCompanyBackupResourcePayload
+	 * @return CreateTenantBackupResourcePayload
 	 */
-	public function setIsDefault( bool $IsDefault ): CreateCompanyBackupResourcePayload {
+	public function setIsDefault( bool $IsDefault ): CreateTenantBackupResourcePayload {
 		$this->IsDefault = $IsDefault;
 
 		return $this;

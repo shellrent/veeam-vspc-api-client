@@ -2,7 +2,7 @@
 
 namespace Shellrent\VeeamVspcApiClient\Payloads;
 
-class EditCompanyBackupResourcePayload implements Payload {
+class EditTenantBackupResourcePayload implements Payload {
 	private ?int $ServerQuota = null;
 	
 	private ?int $WorkstationQuota = null;
@@ -14,9 +14,9 @@ class EditCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param int $ServerQuota
 	 *
-	 * @return EditCompanyBackupResourcePayload
+	 * @return EditTenantBackupResourcePayload
 	 */
-	public function setServerQuota( int $ServerQuota ): EditCompanyBackupResourcePayload {
+	public function setServerQuota( int $ServerQuota ): EditTenantBackupResourcePayload {
 		$this->ServerQuota = $ServerQuota;
 		
 		return $this;
@@ -25,9 +25,9 @@ class EditCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param int $WorkstationQuota
 	 *
-	 * @return EditCompanyBackupResourcePayload
+	 * @return EditTenantBackupResourcePayload
 	 */
-	public function setWorkstationQuota( int $WorkstationQuota ): EditCompanyBackupResourcePayload {
+	public function setWorkstationQuota( int $WorkstationQuota ): EditTenantBackupResourcePayload {
 		$this->WorkstationQuota = $WorkstationQuota;
 		
 		return $this;
@@ -36,9 +36,9 @@ class EditCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param int $VmQuota
 	 *
-	 * @return EditCompanyBackupResourcePayload
+	 * @return EditTenantBackupResourcePayload
 	 */
-	public function setVmQuota( int $VmQuota ): EditCompanyBackupResourcePayload {
+	public function setVmQuota( int $VmQuota ): EditTenantBackupResourcePayload {
 		$this->VmQuota = $VmQuota;
 		
 		return $this;
@@ -47,9 +47,9 @@ class EditCompanyBackupResourcePayload implements Payload {
 	/**
 	 * @param int $StorageQuota
 	 *
-	 * @return EditCompanyBackupResourcePayload
+	 * @return EditTenantBackupResourcePayload
 	 */
-	public function setStorageQuota( int $StorageQuota ): EditCompanyBackupResourcePayload {
+	public function setStorageQuota( int $StorageQuota ): EditTenantBackupResourcePayload {
 		$this->StorageQuota = $StorageQuota;
 		
 		return $this;
