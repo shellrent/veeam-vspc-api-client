@@ -38,6 +38,10 @@ class CompanyRepository implements Repository {
         return $request;
 	}
 
+    public function getCompanySiteResources(string $companyUid) : RequestBuilder{
+        return $this->createGetRequest( '/' . $companyUid . '/siteResources' );
+    }
+
 	public function postCreate( CreateCompanyPayload $request ): RequestBuilder {
 		return $this->createPostRequest( '', $request );
 	}
