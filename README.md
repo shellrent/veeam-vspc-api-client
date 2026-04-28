@@ -1,6 +1,6 @@
 # Veeam Service Provider Console API Client
 
-A PHP SDK for integrating with the [Veeam Service Provider Console (VSPC)](https://www.veeam.com/service-provider-console.html) REST API. The library wraps the official OpenAPI specification provided with VSPC v8.1 and offers repositories, request builders, and payload helpers to quickly interact with the console from PHP applications and automation scripts.
+A PHP SDK for integrating with the [Veeam Service Provider Console (VSPC)](https://www.veeam.com/service-provider-console.html) REST API. The library wraps the official OpenAPI specification provided with VSPC v9.2 and offers repositories, request builders, and payload helpers to quickly interact with the console from PHP applications and automation scripts.
 
 ## Features
 - Guzzle-based HTTP client preconfigured for the VSPC REST endpoints.
@@ -67,7 +67,7 @@ $response = $client->jsonResponse($request);
 Repositories accept optional filters and query parameters when executed through `VeeamSPCClient::send()` or `VeeamSPCClient::jsonResponse()`. You can build complex filters using `Filter` and `FilterCollection` helpers located under `Shellrent\VeeamVspcApiClient\Support`.
 
 ## OpenAPI Specification
-The official VSPC OpenAPI definition used to generate the SDK is stored in [`openapi/3.5.1/vspc-api.json`](openapi/3.5.1/vspc-api.json). Refer to it for a complete list of available operations, parameters, and payload schemas.
+The official VSPC OpenAPI definition used to generate the SDK is stored in [`openapi/3.6/vspc-api.json`](openapi/3.6/vspc-api.json). Refer to it for a complete list of available operations, parameters, and payload schemas.
 
 ## Contributing
 Contributions are welcome! If you plan to submit a pull request:
