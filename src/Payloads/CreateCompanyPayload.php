@@ -24,15 +24,17 @@ class CreateCompanyPayload implements Payload {
 	private ?int $CompanyId = null;
 	
 	private ?string $ResellerUid = null;
-	
-	private ?string $SubscriptionPlanUid = null;
-	
-	private array $Permissions = [
-		'REST',
-	];
 
-	private bool $IsAlarmDetectEnabled = true;
-	
+	private ?string $SubscriptionPlanUid = null;
+
+    private bool $IsRestAccessEnabled = true;
+
+    private bool $IsAlarmDetectEnabled = true;
+
+    private string $Username;
+
+    private string $Password;
+
 	/**
 	 * @param mixed $Name
 	 *
@@ -166,16 +168,38 @@ class CreateCompanyPayload implements Payload {
 	}
 	
 	/**
-	 * @param array|string[] $Permissions
+	 * @param bool $IsRestAccessEnabled
 	 *
 	 * @return CreateCompanyPayload
 	 */
-	public function setPermissions( $Permissions ) {
-		$this->Permissions = $Permissions;
+	public function setIsRestAccessEnabled( bool $IsRestAccessEnabled ): CreateCompanyPayload {
+		$this->IsRestAccessEnabled = $IsRestAccessEnabled;
 
 		return $this;
 	}
-	
+
+    /**
+     * @param string $Username
+     *
+     * @return CreateCompanyPayload
+     */
+    public function setUsername( string $Username ): CreateCompanyPayload {
+        $this->Username = $Username;
+
+        return $this;
+    }
+
+    /**
+     * @param string $Password
+     *
+     * @return CreateCompanyPayload
+     */
+    public function setPassword( string $Password ): CreateCompanyPayload {
+        $this->Password = $Password;
+
+        return $this;
+    }
+
 	/**
 	 * @param bool $IsAlarmDetectEnabled
 	 *
@@ -186,7 +210,7 @@ class CreateCompanyPayload implements Payload {
 
 		return $this;
 	}
-	
+
 	public function getBody() {
 		$array = [
 			'resellerUid' => $this->ResellerUid,
@@ -202,8 +226,12 @@ class CreateCompanyPayload implements Payload {
 				'zipCode' => $this->ZipCode ?? null,
 				'companyId' => $this->CompanyId ?? null,
 			],
+            'ownerCredentials' => [
+                'userName' => $this->Username,
+                'password' => $this->Password
+            ],
 			'subscriptionPlanUid' => $this->SubscriptionPlanUid,
-			'permissions' => $this->Permissions,
+			'isRestAccessEnabled' => $this->IsRestAccessEnabled,
 			'IsAlarmDetectEnabled' => $this->IsAlarmDetectEnabled,
 		];
 		

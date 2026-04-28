@@ -2,12 +2,9 @@
 
 namespace Shellrent\VeeamVspcApiClient\Repositories;
 
-use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyBackupResourcePayload;
 use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyMicrosoft365BackupResourcePayload;
 use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyMicrosoft365ResourcePayload;
 use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanyPayload;
-use Shellrent\VeeamVspcApiClient\Payloads\CreateCompanySiteResourcePayload;
-use Shellrent\VeeamVspcApiClient\Payloads\EditCompanyBackupResourcePayload;
 use Shellrent\VeeamVspcApiClient\Payloads\ModifyCompanyPayload;
 use Shellrent\VeeamVspcApiClient\Payloads\ModifyCompanyResourcePayload;
 use Shellrent\VeeamVspcApiClient\Support\CreateDeleteRequest;
@@ -40,19 +37,11 @@ class CompanyRepository implements Repository {
 
         return $request;
 	}
-	
-	public function getAllSites( string $companyUid ): RequestBuilder {
-		return $this->createGetRequest( sprintf( '/%s/sites', $companyUid ) );
-	}
-	
-	public function getAllCompanyBackupResources( string $companyUid, string $siteUid ): RequestBuilder {
-		return $this->createGetRequest( sprintf( '/%s/sites/%s/backupResources', $companyUid, $siteUid ) );
-	}
-	
-	public function getBackupResourceUsage( string $companyUid, string $siteUid ): RequestBuilder {
-		return $this->createGetRequest( sprintf( '/%s/sites/%s/backupResources/usage', $companyUid, $siteUid ) );
-	}
-	
+
+    public function getCompanySiteResources(string $companyUid) : RequestBuilder{
+        return $this->createGetRequest( '/' . $companyUid . '/siteResources' );
+    }
+
 	public function postCreate( CreateCompanyPayload $request ): RequestBuilder {
 		return $this->createPostRequest( '', $request );
 	}
@@ -60,29 +49,21 @@ class CompanyRepository implements Repository {
 	public function patchModifyCompany( string $companyUid, ModifyCompanyPayload $payload ): RequestBuilder {
 		return $this->createPatchRequest( sprintf( '/%s', $companyUid ), $payload );
 	}
-	
-	public function postCreateCompanySiteResource( string $companyUid, CreateCompanySiteResourcePayload $request ): RequestBuilder {
-		return $this->createPostRequest( sprintf( '/%s/sites', $companyUid ), $request );
-	}
-	
-	public function postCreateCompanyBackupResource( string $companyUid, string $siteUid, CreateCompanyBackupResourcePayload $request ): RequestBuilder {
-		return $this->createPostRequest( sprintf( '/%s/sites/%s/backupResources', $companyUid, $siteUid ), $request );
-	}
-	
-	public function patchEditCompanyBackupResource( string $companyUid, string $siteUid, string $resourceUid, EditCompanyBackupResourcePayload $payload ): RequestBuilder {
-		return $this->createPatchRequest( sprintf( '/%s/sites/%s/backupResources/%s', $companyUid, $siteUid, $resourceUid ), $payload );
-	}
-	
-	public function delete( string $companyUid ): RequestBuilder {
-		return $this->createDeleteRequest( '/' . $companyUid );
-	}
+
+    public function delete( string $companyUid, bool $deleteAllAssignedAgents = false ): RequestBuilder {
+        $request = $this->createDeleteRequest( '/' . $companyUid );
+        
+        if ($deleteAllAssignedAgents) {
+            $request->query([
+                'removeAllAgents' => $deleteAllAssignedAgents
+            ]);
+        }
+
+        return $request;
+    }
 	
 	public function get( string $companyUid ): RequestBuilder {
 		return $this->createGetRequest( '/' . $companyUid );
-	}
-	
-	public function deleteCompanyBackupResource( string $companyUid, string $siteUid, string $resourceUid ): RequestBuilder {
-		return $this->createDeleteRequest( sprintf( '/%s/sites/%s/backupResources/%s', $companyUid, $siteUid, $resourceUid ) );
 	}
 	
 	public function getAllCompanyVb365Resources( string $companyId ): RequestBuilder {

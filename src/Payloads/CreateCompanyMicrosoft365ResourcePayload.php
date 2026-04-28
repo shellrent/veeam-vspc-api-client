@@ -7,8 +7,6 @@ class CreateCompanyMicrosoft365ResourcePayload implements Payload {
 	
 	private $FriendlyName;
 	
-	private $IsJobSchedulingEnabled;
-	
 	/**
 	 * @param mixed $Vb365ServerUid
 	 */
@@ -27,22 +25,11 @@ class CreateCompanyMicrosoft365ResourcePayload implements Payload {
 		
 		return $this;
 	}
-	
-	
-	/**
-	 * @param mixed $IsJobSchedulingEnabled
-	 */
-	public function setIsJobSchedulingEnabled( $IsJobSchedulingEnabled ) {
-		$this->IsJobSchedulingEnabled = $IsJobSchedulingEnabled;
-		
-		return $this;
-	}
-	
+
 	public function getBody() {
 		$body = [
 			"vb365ServerUid" => $this->Vb365ServerUid,
-			"friendlyName" => $this->FriendlyName,
-			"isJobSchedulingEnabled" => $this->IsJobSchedulingEnabled ?? false,
+			"friendlyName" => $this->FriendlyName
 		];
 		
 		return json_encode( $body );
