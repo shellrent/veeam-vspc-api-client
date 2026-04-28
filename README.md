@@ -10,7 +10,7 @@ A PHP SDK for integrating with the [Veeam Service Provider Console (VSPC)](https
 - Returns PSR-7 responses or decoded JSON payloads for convenience.
 
 ## Requirements
-- PHP ^8.1 with the JSON extension enabled.
+- PHP ^8.3 with the JSON extension enabled.
 - Composer for dependency management.
 - Access to a VSPC environment (on-premises or hosted) with API credentials.
 
