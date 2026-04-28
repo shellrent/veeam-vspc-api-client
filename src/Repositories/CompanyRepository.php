@@ -50,11 +50,16 @@ class CompanyRepository implements Repository {
 		return $this->createPatchRequest( sprintf( '/%s', $companyUid ), $payload );
 	}
 
-    public function delete( string $companyUid, bool $deleteAllAssignedAgents = true ): RequestBuilder {
-        return $this->createDeleteRequest( '/' . $companyUid )
-            ->query([
+    public function delete( string $companyUid, bool $deleteAllAssignedAgents = false ): RequestBuilder {
+        $request = $this->createDeleteRequest( '/' . $companyUid );
+        
+        if ($deleteAllAssignedAgents) {
+            $request->query([
                 'removeAllAgents' => $deleteAllAssignedAgents
             ]);
+        }
+
+        return $request;
     }
 	
 	public function get( string $companyUid ): RequestBuilder {
