@@ -30,8 +30,8 @@ class CloudConnectRepository implements Repository {
 		return $this->createGetRequest( '' );
 	}
 
-	public function getAllSitesByCompany(string $companyUid): RequestBuilder {
-		return $this->createGetRequest( '' )
+	public function getAllTenantsByCompany(string $companyUid): RequestBuilder {
+		return $this->createGetRequest( '/tenants' )
             ->filter(new Filter('assignedForCompany', Filter::OPERATION_EQUALS, $companyUid));
 	}
 
