@@ -35,6 +35,18 @@ class CreateCompanyPayload implements Payload {
 
     private string $Password;
 
+    private bool $IsBackupAgentsManagementEnabled = true;
+
+    private ?bool $BackupAgentsManagementHardQuota = null;
+
+    private ?int $BackupAgentsManagementWorkstationAgentsQuota = null;
+
+    private ?int $BackupAgentsManagementServerAgentsQuota = null;
+
+    private bool $IsBackupServersManagementEnabled = true;
+
+    private ?int $BackupServersManagementBackupServerQuota = null;
+
 	/**
 	 * @param mixed $Name
 	 *
@@ -211,7 +223,87 @@ class CreateCompanyPayload implements Payload {
 		return $this;
 	}
 
+    /**
+     * @param bool $IsBackupAgentsManagementEnabled
+     * @return $this
+     */
+    public function setIsBackupAgentsManagementEnabled( bool $IsBackupAgentsManagementEnabled ): CreateCompanyPayload {
+        $this->IsBackupAgentsManagementEnabled = $IsBackupAgentsManagementEnabled;
+
+        return $this;
+    }
+
+    /**
+     * @param null|bool $BackupAgentsManagementHardQuota
+     * @return $this
+     */
+    public function setBackupAgentsManagementHardQuota( ?bool $BackupAgentsManagementHardQuota ): CreateCompanyPayload {
+        $this->BackupAgentsManagementHardQuota = $BackupAgentsManagementHardQuota;
+
+        return $this;
+    }
+
+    /**
+     * @param null|int $BackupAgentsManagementWorkstationAgentsQuota
+     * @return $this
+     */
+    public function setBackupAgentsManagementWorkstationAgentsQuota( ?int $BackupAgentsManagementWorkstationAgentsQuota ): CreateCompanyPayload {
+        $this->BackupAgentsManagementWorkstationAgentsQuota = $BackupAgentsManagementWorkstationAgentsQuota;
+
+        return $this;
+    }
+
+    /**
+     * @param null|int $BackupAgentsManagementServerAgentsQuota
+     * @return $this
+     */
+    public function setBackupAgentsManagementServerAgentsQuota( ?int $BackupAgentsManagementServerAgentsQuota ): CreateCompanyPayload {
+        $this->BackupAgentsManagementServerAgentsQuota = $BackupAgentsManagementServerAgentsQuota;
+
+        return $this;
+    }
+
+    /**
+     * @param bool $IsBackupServersManagementEnabled
+     * @return $this
+     */
+    public function setIsBackupServersManagementEnabled( bool $IsBackupServersManagementEnabled ): CreateCompanyPayload {
+        $this->IsBackupServersManagementEnabled = $IsBackupServersManagementEnabled;
+
+        return $this;
+    }
+
+    /**
+     * @param null|int $BackupServersManagementBackupServerQuota
+     * @return $this
+     */
+    public function setBackupServersManagementBackupServerQuota( ?int $BackupServersManagementBackupServerQuota ): CreateCompanyPayload {
+        $this->BackupServersManagementBackupServerQuota = $BackupServersManagementBackupServerQuota;
+
+        return $this;
+    }
+
 	public function getBody() {
+
+        $remoteServices = [];
+        if ($this->IsBackupAgentsManagementEnabled) {
+            $remoteServices = [
+                'backupAgentsManagement' => [
+                    'isHardQuotaEnabled' => $this->BackupAgentsManagementHardQuota ?? false,
+                    'workstationAgentsQuota' => $this->BackupAgentsManagementWorkstationAgentsQuota ?? null,
+                    'serverAgentsQuota' => $this->BackupAgentsManagementServerAgentsQuota ?? null
+                ]
+            ];
+        }
+
+        if ($this->IsBackupServersManagementEnabled) {
+            $remoteServices = [
+                'backupServersManagement' => [
+                    'backupServerQuota' => $this->BackupServersManagementBackupServerQuota ?? null,
+                ]
+            ];
+        }
+
 		$array = [
 			'resellerUid' => $this->ResellerUid,
 			'organizationInput' => [
@@ -234,6 +326,12 @@ class CreateCompanyPayload implements Payload {
 			'isRestAccessEnabled' => $this->IsRestAccessEnabled,
 			'IsAlarmDetectEnabled' => $this->IsAlarmDetectEnabled,
 		];
+
+        if ($remoteServices) {
+            $array['companyServices'] = [
+                'remoteServices' => $remoteServices
+            ];
+        }
 		
 		return json_encode( $array );
 	}
