@@ -48,7 +48,7 @@ class CloudConnectRepository implements Repository {
     }
 
     public function getAllTenantBackupResources( string $tenantUid ): RequestBuilder {
-        return $this->createGetRequest( sprintf('/tenants/backupResources/%s/backupResources', $tenantUid ));
+        return $this->createGetRequest( sprintf('/tenants/%s/backupResources', $tenantUid ));
     }
 
     public function getTenantBackupResourceUsage( string $tenantUid ): RequestBuilder {
